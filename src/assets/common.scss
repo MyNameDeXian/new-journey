@@ -1,0 +1,80 @@
+/* --- 样式的顺序
+	布局方式 定位 浮动 flex display 等
+	边距 margin padding
+	宽高 height width
+	边框 border
+	字体样式
+	背景
+*/
+body{
+	background: #ebebeb;
+}
+body, p, pre, h1, h2, h3, h4{
+	margin: 0;
+	padding: 0;
+}
+div{
+	box-sizing: border-box;
+}
+.width{
+	width: 750px;
+}
+.min-w{
+	min-width: 750px;
+}
+.h-max{
+	height: 100%;
+}
+.bd-color{
+	border-color: #e67e22;
+}
+.color{
+	color: #e67e22;
+}
+.box-sd{
+	border-radius: 5px;
+	box-shadow: 0 1px 3px rgba(26,26,26,.2);
+}
+.tx-center{
+	text-align: center;
+}
+.ctn-scroll{
+	overflow-y: auto;
+	overflow-x: hidden;
+	&::-webkit-scrollbar{
+		margin-left: 2px;
+		width: 2px;
+		height: 100%;
+		background: #ebebeb;
+	}
+	&::-webkit-scrollbar-thumb{
+		width: 2px;
+		border-radius: 1px;
+		background: #e67e22;
+	}
+	&:after{
+		content: '';
+		display: block;
+		margin-bottom: 80px;
+	}
+}
+.scroll{
+	overflow: auto;
+	&::-webkit-scrollbar{
+		width: 8px;
+		height: 100%;
+		border-radius: 4px;
+		background: #ebebeb;
+	}
+	&::-webkit-scrollbar-thumb{
+		width: 8px;
+		border-radius: 4px;
+		background: #e67e22;
+	}
+}
+.blur-color{
+	color: #08c; 
+}
+.str-color{
+	color: #690;
+}

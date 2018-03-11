@@ -1,0 +1,30 @@
+/* --- 样式的顺序
+	布局方式 定位 浮动 flex display 等
+	边距 margin padding
+	宽高 height width
+	边框 border
+	字体样式
+	背景
+*/
+
+.container-comp{
+	color: #333;
+	font-size: 14px;
+	overflow: auto;
+	background: #EBEBEB;
+	// opacity: .9;
+	.to-top-btn{
+		// display: none;
+		transition: bottom .3s;
+		position: fixed;
+		right: 20px;
+		bottom: -60px;
+		width: 40px;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		border-radius: 50%;
+		color: #fff;
+		background: #ff8e00;
+	}
+}

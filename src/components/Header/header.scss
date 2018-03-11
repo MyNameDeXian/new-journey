@@ -1,0 +1,39 @@
+$height: 56px;
+$logo: 36px;
+.header-comp{
+	border-bottom: 1px solid #e5e5e5;
+	background: #fff;
+	.logo{
+		flex: none;
+		margin-left: 20px;
+		margin-right: 20px;
+		width: $logo;
+		height: $logo;
+		line-height: $logo;
+		text-align: center;
+		border-radius: 50%;
+		font-size: 18px;
+		color: #fff;
+		background: #ea6f5a;
+	}
+	.navbar{
+		margin: auto;
+		padding-right: 80px;
+		height: $height;
+		line-height: $height;
+		.navbar-item{
+			height: $height;
+			padding: 0 21px;
+			margin: 0 10px;
+			border-bottom: 2px solid transparent;
+			// font-size: 16px;
+		}
+		.active-nav-item{
+			border-color: #e67e22;
+		}
+		.navbar-item:hover{
+			word-break: keep-all;
+			color: #e67e22;
+		}
+	}
+}
