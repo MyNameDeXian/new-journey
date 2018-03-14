@@ -33,5 +33,6 @@ color.commons ={
 	function: 'function',
 	return: 'return',
 	this: 'this',
-	event: 'event'
+	event: 'event',
+	class: 'class'
 }

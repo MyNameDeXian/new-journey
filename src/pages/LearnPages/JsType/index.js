@@ -15,7 +15,7 @@ function UpAside(props){
 }
 export function ArrayAttr(){
 	return(
-		<Layout ctns={ arrayAttr }>
+		<Layout ctns={ arrayAttr } allRead='all'>
 			<UpAside />
 		</Layout>
 	)

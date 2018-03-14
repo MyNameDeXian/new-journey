@@ -19,7 +19,8 @@ import {
  	Webpack 
 } from 'pages/LearnPages/Webpack'
 import {
- 	ReactAttr 
+ 	ReactAttr,
+ 	LifeCycleComp
 } from 'pages/LearnPages/ReactPage'
 import {
  	Vue 
@@ -55,9 +56,10 @@ export default () => (
 						<Route path={webpath + '/webpack/Webpack'} component={Webpack}/>
 					</Switch>
 				)}/>
-				<Route path={webpath + '/react'} render={() =>(
+				<Route path={webpath + '/react'} render={() =>( 
 					<Switch>
 						<Route path={webpath + '/react/React'} component={ReactAttr}/>
+						<Route path={webpath + '/react/LifeCycle'} component={LifeCycleComp}/>
 					</Switch>
 				)}/>
 				<Route path={webpath + '/vue'} render={() =>(

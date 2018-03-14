@@ -7,9 +7,9 @@ import Code from './subpages/Codes'
 export default class ContentPanel extends Component {
 	constructor(props){
 		super(props);
+		let allRead = this.props.allRead === 'all' ? null : '250px';
 		this.state = {
-			height: '200px',
-			// height: null,
+			height: allRead,
 			titleNum: 1
 		}
 	}
@@ -19,10 +19,9 @@ export default class ContentPanel extends Component {
 	render(){
 		let { height } = this.state;
 		let { children, title } = this.props;
-		children = (children || '我等你').replace(/^\n/, '');
-		if( /^title/.test(children) ){
+		children = (children || 'Hello World').replace(/^\n/, '');
+		if( /^title/.test(children) ){ //设置标题
 			let arrStr = children.split('\n');
-			console.log(arrStr)
 			title = arrStr[0].replace(/^title */, '');
 			children = children.replace(arrStr[0]+'\n', '');
 		}
@@ -55,7 +54,7 @@ export default class ContentPanel extends Component {
 		for(let i=0; i< arr.length; i++){
 			let str = arr[i];
 			if( /^---/.test(str) ){
-				arr[i+1] = arr[i+1].replace(/^---/, '');
+				arr[i+1] = (arr[i+1] || '').replace(/^---/, '');
 				let item = <Code key={i}>{ str }</Code>
 				result.push(item);
 			} else {

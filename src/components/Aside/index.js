@@ -38,7 +38,7 @@ Aside.Top = (props) =>{
 		<div className={'top-item flex-col f-ai-c ' + active} 
 			style={{ width: line }}
 			onClick={e => {
-				if(param == props.path) return;
+				if(param == props.path || !props.path) return;
 				api.push(props.path)
 			}}>
 			<div className='logo'>{props.logo}</div>

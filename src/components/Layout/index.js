@@ -5,7 +5,7 @@ import ContentPanel from 'components/ContentPanel'
 
 // 整体布局
 export default (props) =>{
-	let { ctns } = props;
+	let { ctns, allRead, img } = props;
 	if( !Array.isArray(ctns) ){
 		ctns = [ctns];
 	}
@@ -13,10 +13,11 @@ export default (props) =>{
 		<div className='flex-row f-jc-c'>
 			<div className='ctn-scroll' style={{height: ctnHeight}}>
 				<div></div>
-		{/* 主内容区域 */}
-				<Contents ctns={ctns}/>
+			{/* 主内容区域 */}
+				{/*img == 'life' && <img src={require('pages/LearnPages/ReactPage/imgs/life.jpg')} alt=""/>*/}
+				<Contents ctns={ctns} allRead={allRead}/>
 			</div>
-		{/* 侧边栏区域 */}
+			{/* 侧边栏区域 */}
 			<div className='flex-col' style={{height: ctnHeight}}>
 				{ props.children }
 				<DownAside ctns={ctns}/>
@@ -26,27 +27,29 @@ export default (props) =>{
 }
 // 内容区域
 function Contents(props){
+	let { ctns, allRead } = props;
+	if(ctns == null) return null;
 	return( 
 		<div>
 			{ 
-				props.ctns.map((item, i) =>(
-					makeContents(item) 
+				ctns.map((item, i) =>(
+					makeContents(item, allRead) 
 				))
 			}
 		</div>
 	)
 }
-function makeContents(obj){
+function makeContents(obj, allRead){
 	let result = [];
 	for(let key in obj){
-		let item = contentItem(key, obj[key]);
+		let item = contentItem(key, obj[key], allRead);
 		result.push(item);
 	}
 	return result;
 }
-function contentItem(name, content){
+function contentItem(name, content, allRead){
 	return(
-		<ContentPanel key={name} title={name}>
+		<ContentPanel key={name} title={name} allRead={allRead}>
 			{ String(content) }
 		</ContentPanel>
 	)

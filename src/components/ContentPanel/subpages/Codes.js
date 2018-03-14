@@ -12,7 +12,8 @@ export default class Code extends Component{
 		let { children } = this.props;
 		// Tab 替换成 空格
 		let str  = children.replace(/	/g, '  ');
-		str  = children.replace(/^---\n/g, '');
+		str = str.replace(/^---\n/g, '');
+		str = str.replace(/</g,'&lt;');
 		str = color.code(str);
 		this.code.innerHTML = str;
 	}

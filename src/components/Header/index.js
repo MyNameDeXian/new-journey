@@ -13,7 +13,7 @@ export default class Header extends Component{
 	render(){
 		return(
 			<div className='header-comp min-w flex-row f-ai-c box-sd'>
-				<div onClick={ this.clickLogo } className='logo'>狼</div>
+				<div onClick={ this.clickLogo } className='logo'>贤</div>
 				<div className='navbar flex-row f-ai-c' ref={el =>this.navbar =el}>
 					{ this.props.children }
 				</div>
