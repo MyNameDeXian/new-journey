@@ -5,9 +5,9 @@ reg字符串或正则对象，
 str字符串对象，
 color字符串颜色，
 */
-color.repl = function(reg, str, color){
+color.repl = function(reg, str, color, font){
 	return (str || '').replace(reg, (e, $_1)=>{
-		return `<span style='color:#${color}'>${ e }</span>`
+		return `<span style='color:#${color};font-size:${font}'>${ e }</span>`
 	})
 }
 // 字符串颜色 #090
@@ -25,7 +25,7 @@ color.code = function(str){
 	// 字符串颜色
 	str = this.strColor(str);
 	// 注释的颜色 #008200 
-	str = this.repl(/(\/\/.*\n)/g, str, '008200 ');
+	str = this.repl(/(\/\/.*\n)/g, str, '008200 ', '14px');
 	return str;
 }
 // 常用对象api

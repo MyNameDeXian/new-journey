@@ -19,6 +19,7 @@ export default class ContentPanel extends Component {
 	render(){
 		let { height } = this.state;
 		let { children, title } = this.props;
+		let dataId = title;
 		children = (children || 'Hello World').replace(/^\n/, '');
 		if( /^title/.test(children) ){ //设置标题
 			let arrStr = children.split('\n');
@@ -26,7 +27,7 @@ export default class ContentPanel extends Component {
 			children = children.replace(arrStr[0]+'\n', '');
 		}
 		return(
-			<div className='content-panel box-sd width' data-id={title}>
+			<div className='content-panel box-sd width' data-id={dataId}>
 				<div className='main-title tx-center'>
 					{ title || 'title' }
 				</div>

@@ -81,6 +81,6 @@ function makeAside(obj){
 }
 function asideItem(key, name){
 	return(
-		<Aside.Item key={key} name={name || key}/>
+		<Aside.Item key={key} name={name || key} title={key}/>
 	)
 }

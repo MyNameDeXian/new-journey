@@ -10,7 +10,7 @@ export default class Aside extends Component{
 
 		}
 	}
-	componentWillMount(){
+	componentDidMount(){
 		
 	}
 	render(){
@@ -49,12 +49,13 @@ Aside.Top = (props) =>{
 	
 Aside.Item = (props) =>{
 	return(
-		<div className='btm-item flex-row' data-aside={props.name} onClick={(e,b) =>{
-			let dom = document.querySelector(`[data-id=${props.name}]`);
-			dom.scrollIntoView();
-			let el = document.querySelector(`[data-aside=${props.name}]`);
-			el.classList.add('hover')
-		}}>
+		<div className='btm-item flex-row' data-aside={props.title} 
+			onClick={(e,b) =>{
+				let dom = document.querySelector(`[data-id=${props.title}]`);
+				dom.scrollIntoView();
+				let el = document.querySelector(`[data-aside=${props.title}]`);
+				el.classList.add('hover')
+			}}>
 			<p className='item-name'>
 				{ props.name }
 			</p>

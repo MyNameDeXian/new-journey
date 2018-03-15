@@ -223,5 +223,10 @@ arr.sort(function(a, b){ return a > b })
 arr.sort(function(a, b){ return a < b })
 //返回[8, 5, 5, 3, 1]
 
+//字符串排序, 只对比第一个字符字符编码，相等的才对比下一位字符
+let arr = ['cab', 'cb', 'b']
+//return a > b 则为升序排序 
+arr.sort(function(a, b){ return a > b })
+//返回["b", "cab", "cb"]
 ---code---
 `
