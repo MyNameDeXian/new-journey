@@ -55,11 +55,13 @@ function contentItem(name, content, allRead){
 	)
 }
 // 侧边栏下半部分区域
+let index = 1;
 function DownAside(props){
+	index = 1;
 	return(
 		<Aside>
 			{ 
-				props.ctns.map((item, i) =>(
+				props.ctns.map((item) =>(
 					makeAside(item) 
 				)) 
 			}
@@ -70,17 +72,17 @@ function makeAside(obj){
 	let result = [];
 	for(let key in obj){
 		let str = obj[key].replace(/^\n/,'');
-		let name = '';
+		let name = key;
 		if(/^title/.test(str)){
 			name = str.split('\n')[0].replace(/^title/,'');
 		}
-		let item = asideItem(key, name);
+		let item = asideItem(key, name, index++);
 		result.push(item);
 	}
 	return result;
 }
-function asideItem(key, name){
+function asideItem(key, name, index){
 	return(
-		<Aside.Item key={key} name={name || key} title={key}/>
+		<Aside.Item key={key} name={name} index={index} dataAside={key}/>
 	)
 }

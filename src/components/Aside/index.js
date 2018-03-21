@@ -49,17 +49,22 @@ Aside.Top = (props) =>{
 	
 Aside.Item = (props) =>{
 	return(
-		<div className='btm-item flex-row' data-aside={props.title} 
+		<div className='btm-item flex-row' data-aside={props.dataAside} 
 			onClick={(e,b) =>{
-				let dom = document.querySelector(`[data-id=${props.title}]`);
+				let dom = document.querySelector(`[data-id=${props.dataAside}]`);
 				dom.scrollIntoView();
-				let el = document.querySelector(`[data-aside=${props.title}]`);
+				let el = document.querySelector(`[data-aside=${props.dataAside}]`);
 				el.classList.add('hover')
 			}}>
+			<p className='item-index'>
+				{props.index}.
+			</p>
 			<p className='item-name'>
 				{ props.name }
 			</p>
-			<p className='btm-bd f-1'></p>
+			<p className='btm-bd f-1'>
+				{/*<span className="index">{props.index}</span>*/}
+			</p>
 		</div>
 	)
 }

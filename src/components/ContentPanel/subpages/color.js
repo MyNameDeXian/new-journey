@@ -12,7 +12,7 @@ color.repl = function(reg, str, color, font){
 }
 // 字符串颜色 #090
 color.strColor = function(str){
-	let reg = /('|")([a-zA-z]+)('|")/g;
+	let reg = /('|")([a-zA-Z]+)('|")/g;
 	return (str || '').replace(reg, '"$2"'.fontcolor('#090'));
 }
 color.code = function(str){

@@ -59,7 +59,8 @@ div{
 	}
 }
 .scroll{
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 	&::-webkit-scrollbar{
 		width: 8px;
 		height: 100%;

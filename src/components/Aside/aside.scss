@@ -48,8 +48,30 @@
 			padding: 8px 20px 3px 3px;
 			border-bottom: 1px solid #e67e22;
 		}
+		.item-index{
+			padding: 9px 0 3px 3px;
+			width: 20px;
+			font-size: 12px;
+			color: #266626;
+			border-bottom: 1px solid #e67e22;
+			opacity: .8;
+		}
 		.btm-bd{
 			border-bottom: 1px solid #e6e6e6;
+			// 右边显示坐标
+			.index{
+				margin: 5px 5px 0;
+				float: right;
+				width: 20px;
+				height: 20px;
+				line-height: 20px;
+				font-size: 12px;
+				color: #fff;
+				text-align: center;
+				border-radius: 50%;
+				background: #266626;
+				opacity: .7;
+			}
 		}
 	}
 }

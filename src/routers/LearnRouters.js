@@ -8,7 +8,11 @@ import {
  	EventApi,
  	DomFunction
 } from 'pages/LearnPages/JavaScript'
-import { ArrayAttr } from 'pages/LearnPages/JsType'
+import {
+ 	ArrayAttr,
+ 	StringAttr,
+ 	ObjectAttr 
+ } from 'pages/LearnPages/JsType'
 import {
 	HtmlTag
 } from 'pages/LearnPages/HtmlPage'
@@ -49,6 +53,8 @@ export default () => (
 				<Route path={webpath + '/jsType'} render={() =>(
 					<Switch>
 						<Route path={webpath + '/jsType/array'} component={ArrayAttr}/>
+						<Route path={webpath + '/jsType/string'} component={StringAttr}/>
+						<Route path={webpath + '/jsType/object'} component={ObjectAttr}/>
 					</Switch>
 				)}/>
 				<Route path={webpath + '/webpack'} render={() =>(
