@@ -11,7 +11,11 @@ import {
 import {
  	ArrayAttr,
  	StringAttr,
- 	ObjectAttr 
+ 	ObjectAttr,
+ 	NumberAttr,
+	RegExpAttr,
+	DateComp,
+	MathComp
  } from 'pages/LearnPages/JsType'
 import {
 	HtmlTag
@@ -51,10 +55,17 @@ export default () => (
 					</Switch>
 				)}/>
 				<Route path={webpath + '/jsType'} render={() =>(
+
+
+
 					<Switch>
 						<Route path={webpath + '/jsType/array'} component={ArrayAttr}/>
 						<Route path={webpath + '/jsType/string'} component={StringAttr}/>
 						<Route path={webpath + '/jsType/object'} component={ObjectAttr}/>
+						<Route path={webpath + '/jsType/number'} component={NumberAttr}/>
+						<Route path={webpath + '/jsType/RegExp'} component={RegExpAttr}/>
+						<Route path={webpath + '/jsType/Date'} component={DateComp}/>
+						<Route path={webpath + '/jsType/Math'} component={MathComp}/>
 					</Switch>
 				)}/>
 				<Route path={webpath + '/webpack'} render={() =>(

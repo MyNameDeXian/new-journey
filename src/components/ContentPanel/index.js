@@ -16,23 +16,29 @@ export default class ContentPanel extends Component {
 	componentWillMount(){
 		
 	}
+	componentDidMount(){
+		// <div className='ctn-title'>{ title }</div>
+		let { children } = this.props;
+		//去除空白和标题
+		let str = (children || 'Hello World').replace(/^\n(title.*\n)?/, '');
+
+	}
 	render(){
 		let { height } = this.state;
 		let { children, title } = this.props;
 		let dataId = title;
-		children = (children || 'Hello World').replace(/^\n/, '');
-		if( /^title/.test(children) ){ //设置标题
-			let arrStr = children.split('\n');
-			title = arrStr[0].replace(/^title */, '');
-			children = children.replace(arrStr[0]+'\n', '');
+		let str = children.match(/\ntitle .+\n?/)
+		if( str != null ){ //设置标题
+			title = str[0].replace(/\ntitle (.+)\n?/, '$1');
 		}
+		children = (children || 'Hello World').replace(/^\n(title.*\n)?/, '');
 		return(
 			<div className='content-panel box-sd width' data-id={dataId}>
 				<div className='main-title tx-center'>
 					{ title || 'title' }
 				</div>
 				<div className='meta tx-center'>作者: 木子 - 日期: 2018-02-28</div>
-				<div className='contents' style={{maxHeight: height}}>
+				<div className='contents' ref={el =>this.ctn = el} style={{maxHeight: height}}>
 					{ this.setStr(children) }
 				</div>
 				<div style={{display: height ? '' : 'none' }} className='read-all-btn tx-center flex-row f-jc-c'>

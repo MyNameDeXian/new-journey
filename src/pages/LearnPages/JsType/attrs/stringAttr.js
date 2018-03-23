@@ -145,6 +145,111 @@ let str = 'abcdbcde'
 str.split(/bc/) //返回 ["a", "d", "de"]
 ---code---
 `
+stringObj.toLowerCase = `
+# toLowerCase() 把字符串转换为小写
+返回一个新字符串，所有大写字母变小写
+# 示例：
+---code---
+let str = 'Hello World'
+str.toLowerCase() //返回 'hello world'
+---code---
+`
+stringObj.toUpperCase = `
+# toUpperCase() 把字符串转换为大写
+返回一个新字符串，所有大写字母变大写
+# 示例：
+---code---
+let str = 'Hello World'
+str.toUpperCase() //返回 "HELLO WORLD"
+---code---
+`
+stringObj.toString_String = `
+toString() | String() 把非字符串对象转换成对象
+返回一个新字符串
+# 示例
+---code---
+let num = 123
+num.toString() //返回 '123'
+num.toString(2) //返回二进制 "1111011"
+num.toString(16) //返回十六进制 "7b"
+String(num) //返回 '123'
+
+let arr = [1, 2, 3]
+arr.toString() //返回 '1,2,3'
+String(arr) //返回 '1,2,3'
+---code---
+`
+stringObj.charCodeAt = `
+# charCodeAt() 返回在指定的位置的字符的 Unicode 编码
+返回十进制的数字
+---code---
+str.charCodeAt(index)
+---code---
+# 参数说明：
+index	必需。表示字符串中某个位置的数字，即字符在字符串中的下标。
+# 示例
+---code---
+let str = '0123'
+str.charCodeAt(0) //返回 ${'0123'.charCodeAt(0)}
+
+let str = 'I love you'
+str.charCodeAt(0) //返回 ${'I love you'.charCodeAt(0)}
+---code---
+`
+stringObj.fromCharCode = `
+# fromCharCode() 可接受一个指定的 Unicode 值，然后返回一个字符串
+---code---
+String.fromCharCode(numX,numX,...,numX)
+---code---
+# 参数说明:
+numX	必需。一个或多个 Unicode 值，即要创建的字符串中的字符的 Unicode 编码
+# 示例
+---code---
+String.fromCharCode(48) //返回 '0'
+String.fromCharCode(0x30) //返回 '0'
+
+String.fromCharCode(25105) //返回 '我'
+String.fromCharCode(29233) //返回 '爱'
+String.fromCharCode(20320) //返回 '你'
+---code---
+`
+stringObj.sub = `
+# toUpperCase() 把字符串显示为下标
+返回一个带 sub 节点
+# 示例：
+---code---
+let str = 'Hello World'
+str.sub() //返回 ${'Hello World'.sub()}
+---code---
+`
+stringObj.sup = `
+# toUpperCase() 把字符串显示为上标
+返回一个带 sup 节点
+# 示例：
+---code---
+let str = 'Hello World'
+str.sup() //返回 ${'Hello World'.sup()}
+---code---
+`
+stringObj.search = `
+# search() 检索与正则表达式相匹配的值
+返回第一个与 regexp 相匹配的子串的起始位置
+如果没有找到任何匹配的子串，则返回 -1
+search 方法不执行全局匹配，它将忽略标志 g
+---code---
+str.search(regexp)
+---code---
+#参数说明：
+regexp 字符串 或 正则对象
+# 示例：
+---code---
+let str = 'abcbc'
+str.search('b') //返回 1
+str.search(/b/) //返回 1
+//加全局标志g无效，不会全局搜索
+str.search(/b/g) //返回 1
+---code---
+`
 stringObj.match = `
 # match() 找到与正则表达式的匹配字符
 若正则表达式没有具有全局标志g，match只执行一次，
@@ -156,9 +261,11 @@ str.match(searchvalue)
 #参数说明：
 searchvalue 必须。字符串 或 正则对象
 # 示例：
+---code---
 let str = 'abcbc'
 str.match('b') //返回 ["b", index: 1, input: "abcbc"]
 str.match(/b/) //返回 ["b", index: 1, input: "abcbc"]
 //加全局标志g
 str.match(/b/g) //返回 ["b", "b"]
+---code---
 `

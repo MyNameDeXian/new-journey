@@ -27,3 +27,20 @@ export default class Code extends Component{
 		)
 	}
 }
+
+const codes = code =>{
+	if(!code) {
+		return '';
+	}
+	return(
+		`<div className='code-comp'>
+			<pre>${code}</pre>
+		</div>`
+	)
+}
+//匹配代码文本
+export function codeText(str){
+	str = str.replace(/---code---/g,'夶')
+	str = str.replace(/夶\n([^夶]*)夶?/g, codes('$1'))
+	return str
+}
