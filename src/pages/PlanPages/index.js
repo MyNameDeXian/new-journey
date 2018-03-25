@@ -10,17 +10,9 @@ const PlanHeader = () =>(
 	</Header>
 )
 
-export function FitnessPlan(){
-	return(
-		<Fitness>
-			<PlanHeader />
-		</Fitness>
-	)
-}
-export function WorkPlan(){
-	return(
-		<Work>
-			<PlanHeader />
-		</Work>
-	)
-}
+export default (props) =>(
+	<div>
+		<PlanHeader />
+		{ props.children }
+	</div>
+)

@@ -13,8 +13,7 @@ export default (props) =>{
 		<div className='flex-row f-jc-c'>
 			<div className='ctn-scroll' style={{height: ctnHeight}}>
 				<div></div>
-			{/* 主内容区域 */}
-				{/*img == 'life' && <img src={require('pages/LearnPages/ReactPage/imgs/life.jpg')} alt=""/>*/}
+				{/* 主内容区域 */}
 				<Contents ctns={ctns} allRead={allRead}/>
 			</div>
 			{/* 侧边栏区域 */}
@@ -31,11 +30,11 @@ function Contents(props){
 	if(ctns == null) return null;
 	return( 
 		<div>
-			{ 
-				ctns.map((item, i) =>(
-					makeContents(item, allRead) 
-				))
-			}
+		{ 
+			ctns.map((item, i) =>(
+				makeContents(item, allRead) 
+			))
+		}
 		</div>
 	)
 }

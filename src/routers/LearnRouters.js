@@ -55,9 +55,6 @@ export default () => (
 					</Switch>
 				)}/>
 				<Route path={webpath + '/jsType'} render={() =>(
-
-
-
 					<Switch>
 						<Route path={webpath + '/jsType/array'} component={ArrayAttr}/>
 						<Route path={webpath + '/jsType/string'} component={StringAttr}/>
