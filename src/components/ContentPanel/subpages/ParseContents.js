@@ -1,3 +1,8 @@
+//替换特殊字符
+export function specialChar(char, symbol){
+	let reg = new RegExp(char, 'g')
+	text = text.replace(reg, symbol);
+}
 //公共匹配标志内的内容
 function replaceText(str, reg, callback){
 	//把多个字符标志替换成一个不常用的特殊字符，正则匹配更方便
@@ -11,25 +16,30 @@ function replaceText(str, reg, callback){
 	return str.replace(/(^\n*|\n*$)/g,'')
 }
 //替换代码内容文本
-function codeText(str){
+export function codeText(str){
 	// 代码节点
 	const codes = code =>(
-		`<div className='code-comp'>
+		`<div class='ctn-code'>
 			<pre>${code}</pre>
 		</div>`
 	)
 	return replaceText(str, /---code-*/g, codes);
 }
 //替换标题
-function titleText(str){
-	return str.replace(/\n#+ ([^\n]+)/g, (reg, $1)=>{
-		return !$1 ? '' : `\n<div className='ctn-title'>${ $1 }</div>`
+export function titleText(str){
+	let i = 1;
+	const titleDom = title =>(
+		`\n<div class='ctn-title'>${i++}. ${ title }</div>`
+	)
+	return str.replace(/\n?#+ ([^\n]+)/g, (reg, $1)=>{
+		console.log($1)
+		return !$1 ? '' : titleDom($1)
 	})
 }
 //匹配文本内容
 export function ctnText(str){
 	const lineDom = ctn =>(
-		`<p className='content-comp'>${ctn}</p>`
+		`<p class='ctn-text'>${ctn}</p>`
 	)
 	const textDoms = ctns =>{
 		ctns = ctns.split('\n');
@@ -44,7 +54,7 @@ export function ctnText(str){
 //匹配表格内容
 export function tabelText(str){
 	const table = trs =>(
-		`<table>${trs}</table>`
+		`<table class='ctn-table'>${trs}</table>`
 	)
 	const tr = tds =>( 
 		`<tr>${tds}</tr>`
@@ -52,7 +62,7 @@ export function tabelText(str){
 	const td = ctn =>(
 		`<td>${ctn}</td>`
 	)
-	const lineDom = str =>{
+	const tableDom = str =>{
 		str = str.split('\n');
 		str = str.map(item =>{
 			if(typeof(item) !== 'string') return '';
@@ -60,5 +70,5 @@ export function tabelText(str){
 			tds = tds.map(ctn => td(ctn))
 		})
 	}
-	return replaceText(str, /---tabel-*/g, ctnDoms);
+	return replaceText(str, /---tabel-*/g, tableDom);
 }
