@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './contentPanel.scss'
-
+import { color } from './subpages/color'
 import {
 	codeText,
 	titleText,
@@ -30,12 +30,13 @@ export default class ContentPanel extends Component {
 	componentDidMount(){
 		let { text } = this.state;
 		text = text.replace(/</g, '&lt;');
+		text = color.code(text)
 		text = titleText(text);
 		text = codeText(text);
 		text = tabelText(text);
 		text = ctnText(text);
-		// text = text.replace(/ /g, '&lt;');
-		// text = text.replace(/	/g, '&lt;&lt;&lt;&lt;');
+		text = text.replace(/^ +/g, '&nbsp;');
+		text = text.replace(/^	+/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
 		this.contents.innerHTML = text;
 	}
 	render(){

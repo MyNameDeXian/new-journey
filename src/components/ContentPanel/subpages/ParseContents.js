@@ -32,7 +32,6 @@ export function titleText(str){
 		`\n<div class='ctn-title'>${i++}. ${ title }</div>`
 	)
 	return str.replace(/\n?#+ ([^\n]+)/g, (reg, $1)=>{
-		console.log($1)
 		return !$1 ? '' : titleDom($1)
 	})
 }
