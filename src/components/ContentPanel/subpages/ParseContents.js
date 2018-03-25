@@ -1,13 +1,18 @@
 //公共匹配标志内的内容
 function replaceText(str, reg, callback){
+	//把多个字符标志替换成一个不常用的特殊字符，正则匹配更方便
 	str = str.replace(reg,'夶');
+	// [^夶]* 表示匹配除了(夶)的任意字符
 	str = str.replace(/夶\n([^夶]*)夶?/g, (text, $1) =>{
+		//去除头尾换行
+		$1 = $1.replace(/(^\n*|\n*$)/g,'');
 		return !$1 ? '' : callback($1);
 	})
-	return str
+	return str.replace(/(^\n*|\n*$)/g,'')
 }
 //替换代码内容文本
 function codeText(str){
+	// 代码节点
 	const codes = code =>(
 		`<div className='code-comp'>
 			<pre>${code}</pre>
@@ -17,33 +22,43 @@ function codeText(str){
 }
 //替换标题
 function titleText(str){
-	return str.replace(/\n# ([^\n]+)/g, (reg, $1)=>{
+	return str.replace(/\n#+ ([^\n]+)/g, (reg, $1)=>{
 		return !$1 ? '' : `\n<div className='ctn-title'>${ $1 }</div>`
 	})
 }
 //匹配文本内容
 export function ctnText(str){
-	const ctnDom = ctn =>(
+	const lineDom = ctn =>(
 		`<p className='content-comp'>${ctn}</p>`
 	)
-	const ctnDoms = ctns =>{
-		ctns = ctns.replace(/(^\n|\n$)/g, '');
+	const textDoms = ctns =>{
 		ctns = ctns.split('\n');
 		let str = '';
 		for(let i=0; i<ctns.length; i++){
-			str += ctnDom(ctns[i])
+			str += lineDom(ctns[i])
 		}
 		return str + '\n'
 	}
-	return replaceText(str, /----*/g, ctnDoms);
+	return replaceText(str, /----*/g, textDoms);
 }
 //匹配表格内容
 export function tabelText(str){
-	const lineDom = (...td) =>{
-		let str = ''
-		for(let i=0; i<td.length; i++){
-			
-		}
+	const table = trs =>(
+		`<table>${trs}</table>`
+	)
+	const tr = tds =>( 
+		`<tr>${tds}</tr>`
+	)
+	const td = ctn =>(
+		`<td>${ctn}</td>`
+	)
+	const lineDom = str =>{
+		str = str.split('\n');
+		str = str.map(item =>{
+			if(typeof(item) !== 'string') return '';
+			let tds = item.split(' ');
+			tds = tds.map(ctn => td(ctn))
+		})
 	}
 	return replaceText(str, /---tabel-*/g, ctnDoms);
 }

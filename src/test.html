@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>1111</td>
+			<td>1111</td>
+		</tr>
+		<tr>
+			<td>1111</td>
+			<td>1111</td>
+		</tr>
+	</table>
+</body>
+<script>
+
+let str=`
+---table--
+12111 ssdf
+sdf sfddsf
+---table--
+---table--
+1122
+---table--
+
+-----
+`
+str = tableText(str)
+console.log(str)
+function replaceText(str, reg, callback){
+	str = str.replace(reg,'夶');
+	str = str.replace(/夶\n([^夶]*)夶?/g, (text, $1) =>{
+		$1 = $1.replace(/(^\n*|\n*$)/g,'');
+		return !$1 ? '' : callback($1);
+	})
+	return str
+}
+function tableText(str){
+	const table = trs =>(
+		`<table>${trs}</table>`
+	)
+	const tr = tds =>( 
+		`<tr>${tds}</tr>`
+	)
+	const td = ctn =>(
+		`<td>${ctn}</td>`
+	)
+	const tableDoms = str =>{
+		str = str.split('\n');
+		str = str.map(item =>{
+			if(typeof(item) !== 'string') return '';
+			let tds = item.split(' ');
+			tds = tds.map(ctn => td(ctn));
+			tds = tds.join('');
+			return tr(tds)
+		})
+		return table(str)
+	}
+	return replaceText(str, /---table-*/g, tableDoms);
+}
+</script>
+</html>

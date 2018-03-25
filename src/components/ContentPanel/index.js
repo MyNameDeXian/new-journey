@@ -4,6 +4,7 @@ import Title from './subpages/Title'
 import Content from './subpages/Content'
 import Code from './subpages/Codes'
 
+
 export default class ContentPanel extends Component {
 	constructor(props){
 		super(props);
@@ -27,7 +28,7 @@ export default class ContentPanel extends Component {
 		let { height } = this.state;
 		let { children, title } = this.props;
 		let dataId = title;
-		let str = children.match(/\ntitle .+\n?/)
+		let str = (children || '').match(/\ntitle .+\n?/)
 		if( str != null ){ //设置标题
 			title = str[0].replace(/\ntitle (.+)\n?/, '$1');
 		}
@@ -38,7 +39,7 @@ export default class ContentPanel extends Component {
 					{ title || 'title' }
 				</div>
 				<div className='meta tx-center'>作者: 木子 - 日期: 2018-02-28</div>
-				<div className='contents' ref={el =>this.ctn = el} style={{maxHeight: height}}>
+				<div className='contents' ref={el =>this.contents = el} style={{maxHeight: height}}>
 					{ this.setStr(children) }
 				</div>
 				<div style={{display: height ? '' : 'none' }} className='read-all-btn tx-center flex-row f-jc-c'>
