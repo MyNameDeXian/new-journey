@@ -5,7 +5,7 @@ import {
 	codeText,
 	titleText,
 	ctnText,
-	tabelText
+	tableText
 } from './subpages/ParseContents'
 
 export default class ContentPanel extends Component {
@@ -33,7 +33,7 @@ export default class ContentPanel extends Component {
 		text = color.code(text)
 		text = titleText(text);
 		text = codeText(text);
-		text = tabelText(text);
+		text = tableText(text);
 		text = ctnText(text);
 		text = text.replace(/^ +/g, '&nbsp;');
 		text = text.replace(/^	+/g, '&nbsp;&nbsp;&nbsp;&nbsp;');

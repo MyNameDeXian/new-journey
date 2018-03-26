@@ -29,7 +29,10 @@ export function codeText(str){
 export function titleText(str){
 	let i = 1;
 	const titleDom = title =>(
-		`\n<div class='ctn-title'>${i++}. ${ title }</div>`
+		`\n<div class='ctn-title flex-row'>
+			<p class='ctn-title-item'>${i++}. ${ title }</p>
+			<p class='f-1 ctn-title-line'></p>
+		</div>`
 	)
 	return str.replace(/\n?#+ ([^\n]+)/g, (reg, $1)=>{
 		return !$1 ? '' : titleDom($1)
@@ -51,23 +54,34 @@ export function ctnText(str){
 	return replaceText(str, /----*/g, textDoms);
 }
 //匹配表格内容
-export function tabelText(str){
+export function tableText(str){
 	const table = trs =>(
 		`<table class='ctn-table'>${trs}</table>`
 	)
 	const tr = tds =>( 
 		`<tr>${tds}</tr>`
 	)
+	const th = th =>(
+		`<th>${th}</th>`
+	)
 	const td = ctn =>(
 		`<td>${ctn}</td>`
 	)
 	const tableDom = str =>{
 		str = str.split('\n');
-		str = str.map(item =>{
+		str = str.map((item, i) =>{
 			if(typeof(item) !== 'string') return '';
-			let tds = item.split(' ');
-			tds = tds.map(ctn => td(ctn))
+			let spl = '我也不知道什么字符不会重复，我只知道一定要长,我不信这还会有重复0_~'
+			item = item.replace(/ +/, spl)
+			let tds = item.split(spl);
+			if(i === 0){
+				tds = tds.map(ctn => th(ctn));
+			} else {
+				tds = tds.map(ctn => td(ctn));
+			}
+			return tr(tds.join(''));
 		})
+		return table(str.join(''))
 	}
-	return replaceText(str, /---tabel-*/g, tableDom);
+	return replaceText(str, /---table-*/g, tableDom);
 }
