@@ -13,7 +13,8 @@ export default class ContentPanel extends Component {
 		super(props);
 		let allRead = this.props.allRead === 'all' ? null : '250px';
 		this.state = {
-			height: allRead
+			// height: allRead
+			height: ''
 		}
 	}
 	componentWillMount(){
@@ -30,13 +31,12 @@ export default class ContentPanel extends Component {
 	componentDidMount(){
 		let { text } = this.state;
 		text = text.replace(/</g, '&lt;');
+		text = text.replace(/>/g, '&gt;');
 		text = color.code(text)
 		text = titleText(text);
 		text = codeText(text);
 		text = tableText(text);
 		text = ctnText(text);
-		text = text.replace(/^ +/g, '&nbsp;');
-		text = text.replace(/^	+/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
 		this.contents.innerHTML = text;
 	}
 	render(){

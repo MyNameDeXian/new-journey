@@ -20,7 +20,7 @@ class Home extends Component {
 					<div className='title'>木子书屋</div>
 					<div className='header-btns width flex-row'>
 						<TopBtn type='/web' path='/html/HtmlTag'>HTML</TopBtn>
-						<TopBtn type='/web' path='/css/CssStyle'>CSS</TopBtn>
+						<TopBtn type='/web' path='/css/font'>CSS</TopBtn>
 						<TopBtn type='/web' path='/javaScript/GlobalsApi'>JavaScript</TopBtn>
 						<TopBtn type='/web' path='/webpack/Webpack'>Webpack</TopBtn>
 						<TopBtn type='/web' path='/react/React'>React</TopBtn>

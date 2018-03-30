@@ -203,6 +203,24 @@ arr.toString() //返回 '1,2,3'
 String(arr) //返回 '1,2,3'
 ---code---
 `
+stringObj.fontcolor = `
+# fontcolor() 使用指定的颜色来显示字符串
+---code---
+str.fontcolor(color)
+---code---
+# 参数描述
+---table---
+参数 描述
+color 必需。为字符串规定 font-color。该值必须是颜色名(red)、RGB 值(rgb(255,0,0))或者十六进制数(#FF0000)
+---table---
+# 示例：
+---code---
+let str = 'abc'
+str.fontcolor('red')  //红色字体
+str.fontcolor('#fff') //白色字体
+str.fontcolor(rgb(255,255,255))
+---code---
+`
 stringObj.charCodeAt = `
 # charCodeAt() 返回在指定的位置的字符的 Unicode 编码
 -----------------------------------------------

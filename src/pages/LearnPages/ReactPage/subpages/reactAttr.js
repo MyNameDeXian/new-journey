@@ -37,18 +37,18 @@ ref 可以挂载在组件上，也可以挂载在元素节点上
 -----------------------------------------------
 ---code---
 // 挂载在组件上，指向组件实例
-<Comp ref='comp'/> // ref 接收字符串
+<Comp ref='comp'/> 
 this.refs.comp  //调用方法,指向Comp组件实例对象,可以调用Comp的State 和 方法
 
-<Comp ref={el => this.comp =el}/> // ref 接收函数
+<Comp ref={el => this.comp =el}/> 
 this.comp //调用方法,指向Comp组件实例对象,可以调用Comp的State 和 方法
 
 //挂载在 Dom 上，指向 Dom 
-<div ref='dom'></div> //接收字符串
-this.refs.dom // //调用方法,指向DOM,可以调用Dom的属性和方法
+<div ref='dom'></div> 
+this.refs.dom //调用方法,指向DOM,可以调用Dom的属性和方法
 
-<div ref='dom'></div> //接收函数
-this.dom // //调用方法,指向DOM,可以调用Dom的属性和方法
+<div ref={el => this.dom =el}></div> 
+this.dom //调用方法,指向DOM,可以调用Dom的属性和方法
 ---code---
 # 示例：
 ---code---

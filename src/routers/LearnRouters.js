@@ -21,7 +21,9 @@ import {
 	HtmlTag
 } from 'pages/LearnPages/HtmlPage'
 import {
- 	CssStyle 
+ 	TextComp,
+ 	FontStyle,
+ 	Background
 } from 'pages/LearnPages/CssPage'
 import {
  	Webpack 
@@ -44,8 +46,12 @@ export default () => (
 						<Route path={webpath + '/html/HtmlTag'} component={HtmlTag}/>
 					</Switch>
 				)}/>
-				<Route path={webpath + '/css'} render={() =>(
-					<Route path={webpath + '/css/CssStyle'} component={CssStyle}/>
+				<Route path={webpath + '/css'} render={() =>( 
+					<Switch>
+						<Route path={webpath + '/css/text'} component={TextComp}/> 
+						<Route path={webpath + '/css/font'} component={FontStyle}/> 
+						<Route path={webpath + '/css/background'} component={Background}/> 
+					</Switch>
 				)}/>
 				<Route path={webpath + '/javaScript'} render={() =>(
 					<Switch>

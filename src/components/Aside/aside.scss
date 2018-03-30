@@ -16,12 +16,13 @@
 			color: #e67e22;
 		}
 		&:hover{
-			color: #0000CD;
+			color: #0000CC;
 		}
-		color: #4F94CD;
+		// color: #4F94CD;
+		color: #198812;
 	}
 	.top-item{
-		margin-top: 15px;
+		padding-top: 15px;
 		float: left;
 		// width: 25%;
 		// color: #888;
@@ -38,8 +39,7 @@
 	}
 	.btm-item{
 		padding: 0 30px;
-		// color: #1C86EE;
-		color: #111;
+		color: #198812;
 		 &.hover, &:hover{
 			background: url('./arrow.png') 10px 15px no-repeat;
 			background-size: 16px;
@@ -47,6 +47,7 @@
 		.item-name{
 			padding: 8px 20px 3px 3px;
 			border-bottom: 1px solid #e67e22;
+			// color: #198912;
 		}
 		.item-index{
 			padding: 9px 0 3px 3px;

@@ -15,12 +15,23 @@ function replaceText(str, reg, callback){
 	})
 	return str.replace(/(^\n*|\n*$)/g,'')
 }
+//复制代码
+window.copyCode = (el) =>{
+	let code = el.nextElementSibling.innerText;
+	let input = document.getElementById('copyText');
+	input.value = code.replace(/\n/g, '\n');
+	input.focus();
+	input.select();
+	let copy = document.execCommand('copy');
+	console.log(copy,input.value)
+}
 //替换代码内容文本
 export function codeText(str){
 	// 代码节点
-	const codes = code =>(
+	const codes = (code) =>(
 		`<div class='ctn-code'>
-			<pre>${code}</pre>
+			<div class='copy-btn' onclick=copyCode(this)>复制</div>
+			<pre id='copyCode'>${code}</pre>
 		</div>`
 	)
 	return replaceText(str, /---code-*/g, codes);
@@ -47,8 +58,14 @@ export function ctnText(str){
 		ctns = ctns.split('\n');
 		let str = '';
 		for(let i=0; i<ctns.length; i++){
-			str += lineDom(ctns[i])
+			let ctn = ctns[i];
+			ctn = ctn.replace(/^ +/g, '&nbsp;◆&nbsp;&nbsp;');
+			ctn = ctn.replace(/^	+/g, '&nbsp;◆&nbsp;&nbsp;');
+			ctn = ctn.replace(/^(注意(:|：))/, '$1'.fontcolor('red'))
+			ctn = ctn.replace(/^((提示|注释)(:|：))/, '$1'.fontcolor('#ff9955'))
+			str += lineDom(ctn)
 		}
+		
 		return str + '\n'
 	}
 	return replaceText(str, /----*/g, textDoms);
@@ -64,20 +81,32 @@ export function tableText(str){
 	const th = th =>(
 		`<th>${th}</th>`
 	)
-	const td = ctn =>(
-		`<td>${ctn}</td>`
-	)
+	const td = (ctn, width) =>{
+		return `<td style='width:${width}'>${ctn}</td>`
+	}
+	
 	const tableDom = str =>{
 		str = str.split('\n');
+		let width = '';
+		if(/^\d+%/.test(str[0])){
+			width = str.splice(0,1)[0]
+		}
 		str = str.map((item, i) =>{
 			if(typeof(item) !== 'string') return '';
-			let spl = '我也不知道什么字符不会重复，我只知道一定要长,我不信这还会有重复0_~'
+			let spl = '夶' //以特殊字符标志分割
 			item = item.replace(/ +/, spl)
 			let tds = item.split(spl);
 			if(i === 0){
 				tds = tds.map(ctn => th(ctn));
-			} else {
-				tds = tds.map(ctn => td(ctn));
+			} else{
+				tds = tds.map((ctn, i)=>{ 
+					if(i === 0)
+						return td(ctn, width)
+					else {
+						ctn = ctn.replace(/\|/g, '。<br\>')
+						return td(ctn)
+					}
+				});
 			}
 			return tr(tds.join(''));
 		})

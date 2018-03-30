@@ -1,7 +1,17 @@
 export const regAttr = {}
 
+regAttr.common = `
+title 常用的正则表达式
+---table---
+名称     正则表达式
+密码账号 /^[A-z0-9_]+$/  字母、数组、下划线
+汉字     /^[\\u4e00-\\u9fa5]+$/
+手机号码 /^1[34578]\d{9}$/
+---table---
+`
 regAttr.modifiers = `
 title 修饰符
+# 修饰符描述
 ---table---
 修饰符 描述
 i 执行对大小写不敏感的匹配
@@ -22,6 +32,15 @@ title 方括号
 [A-z] 相当于查找[a-z][A-Z]的集合
 [^abc]* 表示查找除了方括号内的任意字符
 (red|blue|green) 查找任何指定的选项
+---table---
+`
+regAttr.big =`
+title 大括号
+# 大括号使用姿势
+---table---
+/\d{2,}/  表示匹配至少 2 个连续数字
+/\d{1,2}/ 表示匹配至少 1 个、最多 2 个连续数字
+/\d{2}/   表示匹配 2 个连续数字
 ---table---
 `
 regAttr.metacharacters = `
