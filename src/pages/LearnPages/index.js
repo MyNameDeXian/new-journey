@@ -11,7 +11,7 @@ const web = '/web';
 const LearnHeader = () =>(
 	<Header>
 		<Header.Item type={web} defaultPath='/html' path='/HtmlTag' title='HTML'/>
-		<Header.Item type={web} defaultPath='/css' path='/font'  title='CSS'/>
+		<Header.Item type={web} defaultPath='/css' path='/style'  title='CSS'/>
 		<Header.Item type={web} defaultPath='/javaScript' path='/GlobalsApi' title='JavaScript'/>
 		<Header.Item type={web} defaultPath='/jsType' path='/array' title='JS数据类型'/>
 		<Header.Item type={web} defaultPath='/webpack' path='/Webpack' title='Webpack'/>

@@ -52,12 +52,12 @@ background-position: top; => background-position: top center;
 //以百分比设置，x水平位置，y垂直位置
 background-position: x% y%; 	
 //如果您仅规定了一个值，另一个值将是 50%
-background-position: 20%; == background-position: 20% 50%;
+background-position: 20%; => background-position: 20% 50%;
 
 //以单位设置
 background-position: 5px 5px | .5em .5em | .5rem .5rem;
 //如果您仅规定了一个值，另一个值将是50%
-background-position: 10px; == background-position: 10px 50%;
+background-position: 10px; => background-position: 10px 50%;
 //可以和 % 混用
 background-position: 5px 20% | 20% 5px;
 ---code---

@@ -67,6 +67,7 @@
 			margin: 5px 0 5px 5px;
 			padding: 0 0 3px 10px;
 			color: #333;
+			white-space: pre-wrap;
 			border-bottom: 1px dashed #666;
 		}
 		.ctn-table{
@@ -94,6 +95,7 @@
 					border-right: 1px solid #3f3f3f;
 				}
 				td{
+					white-space: pre-wrap;
 					border: 1px solid #aaa;
 					border-top: none;
 					border-left: none;

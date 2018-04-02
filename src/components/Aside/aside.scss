@@ -40,6 +40,7 @@
 	.btm-item{
 		padding: 0 30px;
 		color: #198812;
+		white-space: pre-wrap;
 		 &.hover, &:hover{
 			background: url('./arrow.png') 10px 15px no-repeat;
 			background-size: 16px;

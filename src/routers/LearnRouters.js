@@ -21,6 +21,7 @@ import {
 	HtmlTag
 } from 'pages/LearnPages/HtmlPage'
 import {
+	StyleComp,
  	TextComp,
  	FontStyle,
  	Background
@@ -49,6 +50,7 @@ export default () => (
 				<Route path={webpath + '/css'} render={() =>( 
 					<Switch>
 						<Route path={webpath + '/css/text'} component={TextComp}/> 
+						<Route path={webpath + '/css/style'} component={StyleComp}/> 
 						<Route path={webpath + '/css/font'} component={FontStyle}/> 
 						<Route path={webpath + '/css/background'} component={Background}/> 
 					</Switch>

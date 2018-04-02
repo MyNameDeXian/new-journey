@@ -103,7 +103,7 @@ export function tableText(str){
 					if(i === 0)
 						return td(ctn, width)
 					else {
-						ctn = ctn.replace(/\|/g, '。<br\>')
+						ctn = ctn.replace(/\|/g, '<br\>')
 						return td(ctn)
 					}
 				});
