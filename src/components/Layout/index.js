@@ -70,10 +70,10 @@ function DownAside(props){
 function makeAside(obj){
 	let result = [];
 	for(let key in obj){
-		let str = obj[key].replace(/^\n/,'');
+		let str = obj[key].replace(/^\n+/,'');
 		let name = key;
 		if(/^title/.test(str)){
-			name = str.split('\n')[0].replace(/^title/,'');
+			name = str.split('\n')[0].replace(/^title */,'');
 		}
 		let item = asideItem(key, name, index++);
 		result.push(item);

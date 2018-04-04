@@ -10,7 +10,7 @@ function UpAside(props){
 	const type = '/web/css/'
 	return(
 		<Aside isScroll='no'>
-			<Aside.Top name='Style' logo='S' path={type + 'style'}/>
+			<Aside.Top name='Style' logo='样' path={type + 'style'}/>
 			<Aside.Top name='字体' logo='字' path={type + 'font'}/>
 			<Aside.Top name='文本' logo='文' path={type + 'text'}/>
 			<Aside.Top name='背景' logo='景' path={type + 'background'}/>

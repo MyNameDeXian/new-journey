@@ -29,7 +29,7 @@ class Home extends Component {
 				</div>
 				<Header>
 					<Header.Item path='/' title='首页'/>
-					<Header.Item path='/fitness' title='计划'/>
+					<Header.Item path='/plan' title='计划'/>
 					<Header.Item path='/calendar' title='日历'/>
 					<Header.Item path='/about' title='关于'/>
 				</Header>

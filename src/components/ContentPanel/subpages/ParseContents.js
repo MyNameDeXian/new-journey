@@ -41,7 +41,7 @@ export function titleText(str){
 	let i = 1;
 	const titleDom = title =>(
 		`\n<div class='ctn-title flex-row'>
-			<p class='ctn-title-item'>${i++}. ${ title }</p>
+			<p class='ctn-title-item'>${i++}. ${title}</p>
 			<p class='f-1 ctn-title-line'></p>
 		</div>`
 	)

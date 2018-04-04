@@ -66,10 +66,50 @@ inline-flex 将对象作为内联块级弹性伸缩盒显示。（伸缩盒最�
 ---table---
 `
 style.position = `
-
+title position 定位
+# position 属性规定元素的定位类型
+---code---
+position: relutive | absolute | fixed;
+---code---
+# z-index 设置定位元素堆叠顺序
+---code---
+z-index: number; //值为数字
+z-index: 99;
+---code---
+# 可能值描述
+---table---
+值 描述
+relative 生成相对定位的元素，相对于其正常位置进行定位。| 因此，"left:20px" 会向元素的 left 位置添加 20 像素。
+absolute 生成绝对定位的元素，相对于已定位的父元素进行定位。| 元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。
+fixed 生成固定定位的元素，相对于浏览器窗口进行定位。| 元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。
+---table---
 `
 style.float = `
-
+title float 浮动
+# float 设置元素是否浮动
+---code---
+float: left | right;
+---code---
+# 可能值描述
+---table---
+值 描述
+left  元素向左浮动。
+right 元素向右浮动。
+none  默认值。元素不浮动，并会显示在其在文本中出现的位置。
+---table---
+# 清除浮动的几种方法：
+---code---
+//给浮动元素下一个兄弟元素 clear 属性
+.next{
+	clear: both;
+}
+//清除浮动引起没有撑起容器高度问题
+.ctr:after{
+	content: '';
+	display: table;
+	clear: both;
+}
+---code---
 `
 style.cursor = `
 title cursor 光标类型
@@ -96,13 +136,58 @@ help      此光标指示可用的帮助（通常是一个问号或一个气球�
 ---table---
 `
 style.overflow = `
-
+# overflow 属性规定当内容溢出元素框时发生的事情
+---code---
+overflow: visible | hidden | scroll | auto;
+---code---
+# 可能值描述
+---table---
+值 描述
+visible 默认值。内容不会被修剪，会呈现在元素框之外。
+hidden  内容会被修剪，并且其余内容是不可见的。
+scroll  内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。
+auto    如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。
+---table---
+-----
+注释：
+	如果值为 scroll，不论是否需要，用户代理都会提供一种滚动机制。因此，有可能即使元素框中可以放下所有内容也会出现滚动条
+-----
 `
 style.visibility = `
-
+# visibility 属性规定元素是否可见
+---code---
+visibility: visible | hidden | collapse;
+---code---
+# 可能值描述
+---table---
+值  描述
+visible  默认值。元素是可见的。
+hidden   元素是不可见的。
+collapse 当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 "hidden"。
+---table---
+-------
+提示：
+	即使不可见的元素也会占据页面上的空间。请使用 "display" 属性来创建不占据页面空间的不可见元素。
+-------
 `
 style.verticalAlign = `
-title vertical-align
+title vertical-align 垂直对齐
+# vertical-align 属性设置元素的垂直对齐方式
+---code---
+vertical-align: baseline | top | middle | bottom;
+---code---
+# 
+---table---
+baseline 默认。元素放置在父元素的基线上。
+sub      垂直对齐文本的下标。
+super    垂直对齐文本的上标
+top      把元素的顶端与行中最高元素的顶端对齐
+text-top 把元素的顶端与父元素字体的顶端对齐
+middle   把此元素放置在父元素的中部。
+bottom   把元素的顶端与行中最低的元素的顶端对齐。
+text-bottom 把元素的底端与父元素字体的底端对齐。
+%        使用 "line-height" 属性的百分比值来排列此元素。允许使用负值。
+---table---
 `
 style.width_height = `
 title 常用样式

@@ -1,7 +1,7 @@
 export const color = {};
 // 字符串颜色 #090
 color.strColor = function(str){
-	let reg = /('|")([#\a-zA-Z]+)('|")?/g;
+	let reg = /('|")([#\a-zA-Z:0-9]+)('|")/g;
 	return (str || '').replace(reg, `<span style=color:#090>"$2"</span>`)
 }
 color.code = function(str){
