@@ -7,7 +7,14 @@ import {
 	ctnText,
 	tableText
 } from './subpages/ParseContents'
-
+const love = `
+title 愿
+----
+	和你
+	若梦，便一梦不醒。
+	若真，守护你一生。
+----
+`
 export default class ContentPanel extends Component {
 	constructor(props){
 		super(props);
@@ -18,9 +25,10 @@ export default class ContentPanel extends Component {
 		}
 	}
 	componentWillMount(){
+
 		let { title, children } = this.props;
 		let dataId = title;
-		let text = (children || 'Hello World').replace(/^\n*title (.*)\n/, (reg, $1) =>{
+		let text = (children || love).replace(/^\n*title (.*)\n/, (reg, $1) =>{
 			title = $1;
 			return '';
 		});
@@ -46,7 +54,7 @@ export default class ContentPanel extends Component {
 				<div className='main-title tx-center'>
 					{ title || 'title' }
 				</div>
-				<div className='meta tx-center'>作者: 木子 - 日期: 2018-02-28</div>
+				{this.props.children && <div className='meta tx-center'>作者: 李德贤 - 日期: 2018-02-28</div>}
 				<div className='contents' ref={el =>this.contents = el} style={{maxHeight: height}}>
 					
 				</div>
