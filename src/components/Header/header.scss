@@ -3,6 +3,8 @@ $logo: 36px;
 .header-comp{
 	border-bottom: 1px solid #e5e5e5;
 	background: #fff;
+	overflow: hidden;
+	transition: height .15s;
 	.logo{
 		flex: none;
 		margin-left: 20px;

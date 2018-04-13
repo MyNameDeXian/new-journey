@@ -8,7 +8,7 @@ color.code = function(str){
 	str = str.replace(/	/g, '  ');
 	// 常用对象 颜色 #00f
 	for(let key in this.commons){
-		let reg = new RegExp(this.commons[key], 'g');
+		let reg = new RegExp('(\n| )'+this.commons[key], 'g');
 		str = str.replace(reg, `<span style=color:#00f>${key}</span>`)
 	}
 	// 字符串颜色
@@ -22,6 +22,5 @@ color.commons ={
 	function: 'function',
 	return: 'return',
 	this: 'this',
-	event: 'event',
 	class: 'class'
 }

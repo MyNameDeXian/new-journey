@@ -2,7 +2,7 @@ import createHistory from 'history/createHashHistory'
 const hashHistory = createHistory('hashHistory')
 
 // 内容高度
-export const ctnHeight = window.innerHeight - 70;
+export const ctnHeight = window.innerHeight - 60;
 export const api = {};
 //获取路由参数
 api.getUrlParam = function(key){

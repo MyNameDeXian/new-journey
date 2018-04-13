@@ -52,7 +52,11 @@ height: .5em; => height: .5 * 24 = 12px;
 `
 style.display = `
 title display 元素框类型
-# 元素生成的框的类型值描述
+# display 元素生成的框的类型值描述
+---code---
+display: none | block | flex | inline | inline-block;
+---code---
+# 可能值描述
 ---table---
 值 描述
 none   此元素不会被显示。
@@ -176,8 +180,9 @@ title vertical-align 垂直对齐
 ---code---
 vertical-align: baseline | top | middle | bottom;
 ---code---
-# 
+# 可能值描述
 ---table---
+值 描述
 baseline 默认。元素放置在父元素的基线上。
 sub      垂直对齐文本的下标。
 super    垂直对齐文本的上标

@@ -20,7 +20,7 @@ const LearnHeader = () =>(
 	</Header>
 )
 export default (props) =>(
-	<div>
+	<div className='flex-col' style={{'height': '100%'}}>
 		<LearnHeader />
 		{ props.children }
 	</div>

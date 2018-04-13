@@ -39,6 +39,8 @@ Aside.Top = (props) =>{
 			style={{ width: line }}
 			onClick={e => {
 				if(param == props.path || !props.path) return;
+				let header = document.querySelector('.header-comp')
+				header.style.height = '56px'
 				api.push(props.path)
 			}}>
 			<div className='logo'>{props.logo}</div>

@@ -1,7 +1,7 @@
 export const bg = {}
 
 bg.background = `
-title 背景属性简写
+title background 简写
 # background 简写属性在一个声明中设置所有的背景属性
 不需要按顺序写
 ---code---

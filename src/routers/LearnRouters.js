@@ -24,7 +24,11 @@ import {
 	StyleComp,
  	TextComp,
  	FontStyle,
- 	Background
+ 	Background,
+ 	Animations,
+ 	TransComp,
+	BorderComp,
+	FlexComp
 } from 'pages/LearnPages/CssPage'
 import {
  	Webpack 
@@ -52,6 +56,10 @@ export default () => (
 					<Route path={webpath + '/css/style'} component={StyleComp}/> 
 					<Route path={webpath + '/css/font'} component={FontStyle}/> 
 					<Route path={webpath + '/css/background'} component={Background}/> 
+					<Route path={webpath + '/css/animation'} component={Animations}/> 
+					<Route path={webpath + '/css/trans'} component={TransComp}/> 
+					<Route path={webpath + '/css/border'} component={BorderComp}/> 
+					<Route path={webpath + '/css/flex'} component={FlexComp}/> 
 				</Switch>
 			)}/>
 			<Route path={webpath + '/javaScript'} render={() =>(

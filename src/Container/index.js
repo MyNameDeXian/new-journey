@@ -8,8 +8,12 @@ export default class Container extends Component{
 			height: window.innerHeight,
 		}
 	}
-	componentWillMount(){
-		
+	componentDidMount(){
+		window.onresize = () =>{
+			if( window.innerHeight !== this.state.height ) {
+				location.reload(false);
+			}
+		}
 	}
 	render(){
 		let { height, isShowToTop } = this.state;
@@ -25,18 +29,25 @@ export default class Container extends Component{
 	}
 	onScroll = (e) =>{
 		let el = e.target;
+		if( el.className.indexOf('aside-comp') !== -1 ){
+			return false;
+		}
 		let top = el.scrollTop;
 		let topEl = this.toTopBtn;
-		if(top >= 100) {
+		let header = document.querySelector('.header-comp')
+		if(top >= 160) {
 			topEl.style.bottom = '20px';
+			header.style.height = '0'
 		} else{
 			topEl.style.bottom = '-60px';
+			header.style.height = '56px'
 		}
-		this.scrollTarget = e.target;
+		this.scrollTarget = el
 	}
 	toTopClick = () =>{
 		this.toTop.scrollIntoView();
 		let el = this.scrollTarget.children[0];
 		el.scrollIntoView();
+		this.scrollTarget = null;
 	}
 }

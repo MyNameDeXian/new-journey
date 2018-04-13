@@ -10,14 +10,14 @@ export default (props) =>{
 		ctns = [ctns];
 	}
 	return(
-		<div className='flex-row f-jc-c'>
-			<div className='ctn-scroll' style={{height: ctnHeight}}>
+		<div className='flex-row f-jc-c f-1' style={{paddingBottom: '3px', overflow: 'hidden'}}>
+			<div className='ctn-scroll' style={{height: '100%'}}>
 				<div></div>
 				{/* 主内容区域 */}
 				<Contents ctns={ctns} allRead={allRead}/>
 			</div>
 			{/* 侧边栏区域 */}
-			<div className='flex-col' style={{height: ctnHeight}}>
+			<div className='flex-col' style={{height: '100%'}}>
 				{ props.children }
 				<DownAside ctns={ctns}/>
 			</div>
