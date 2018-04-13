@@ -30,11 +30,45 @@ flex-direction: row | column | row-reverse | column-reverse;
 ---code---
 # 可能值描述
 ---table---
+23%
 值 描述
 row 	 			默认值。主轴为水平方向，起点在左端。
 column 			主轴为垂直方向，起点在上沿。
 row-reverse 	主轴为水平方向，起点在右端。
 column-reverse 主轴为垂直方向，起点在下沿。
+---table---
+`
+flex.justifyContent = `
+title justify-content 主轴对齐
+# justify-content 属性定义了项目在主轴上的对齐方式
+---code---
+justify-content: flex-end | center | space-between | space-around;
+---code---
+# 可能值描述
+---table---
+22%
+值 描述
+flex-start 	默认值。左对齐
+flex-end 	右对齐
+center 		居中
+space-between 	两端对齐，项目之间的间隔都相等。
+space-around 	每个项目两侧的间隔相等。项目之间的间隔比项目与边框的间隔大一倍。
+---table---
+`
+flex.alignItems = `
+title align-items 交叉轴对齐
+# align-items 属性定义项目在交叉轴上如何对齐
+---code---
+align-items: flex-start | flex-end | center | baseline | stretch;
+---code---
+# 可能值描述
+---table---
+值 描述
+flex-start 	交叉轴的起点对齐。
+flex-end 	交叉轴的终点对齐。
+center 		交叉轴的中点对齐。
+baseline  	项目的第一行文字的基线对齐。
+stretch 	默认值。如果项目未设置高度或设为auto，将占满整个容器的高度。
 ---table---
 `
 flex.wrap = `
@@ -59,38 +93,6 @@ flex-flow: flex-direction flex-wrap;
 flex-flow: row nowrap; //默认值
 ---code---
 `
-flex.justifyContent = `
-title justify-content 主轴对齐
-# justify-content 属性定义了项目在主轴上的对齐方式
----code---
-justify-content: flex-end | center | space-between | space-around;
----code---
-# 可能值描述
----table---
-值 描述
-flex-start 	默认值。左对齐
-flex-end 	右对齐
-center 		居中
-space-between 	两端对齐，项目之间的间隔都相等。
-space-around 	每个项目两侧的间隔相等。项目之间的间隔比项目与边框的间隔大一倍。
----table---
-`
-flex.alignItems = `
-title align-items 交叉轴对齐
-# align-items 属性定义项目在交叉轴上如何对齐
----code---
-align-items: flex-start | flex-end | center | baseline | stretch;
----code---
-# 可能值描述
----table---
-值 描述
-flex-start 	交叉轴的起点对齐。
-flex-end 	交叉轴的终点对齐。
-center 		交叉轴的中点对齐。
-baseline: 	项目的第一行文字的基线对齐。
-stretch 		默认值。如果项目未设置高度或设为auto，将占满整个容器的高度。
----table---
-`
 flex.alignContent = `
 title align-content 多轴对齐
 # align-content 属性定义了多根轴线的对齐方式。
@@ -112,7 +114,7 @@ flex.flexItem = `
 title flex 项目属性简写
 # flex 属性是flex-grow, flex-shrink 和 flex-basis的简写,
 ---code---
-flex: none | flex-grow flex-shrink flex-basis;
+flex: none | flex-grow flex-shrink flex-basis; //后面两个属性可选
 flex: 0 1 auto; //默认值
 ---code---
 # 可能值描述
@@ -157,4 +159,120 @@ flex-basis: length | auto;
 auto 默认值。项目本来占据的大小
 length 可以使用 px、%、rem 等单位定义。
 ---table---
+`
+flex.order = `
+title order 排列顺序
+# order 属性定义项目的排列顺序。数值越小，排列越靠前，默认为0
+---code---
+order: integer; //可为负数
+---code---
+`
+flex.alignSelf = `
+title align-self 单个对齐
+# align-self 属性允许单个项目有与其他项目不一样的对齐方式
+---code---
+align-self: flex-start | flex-end | center | baseline | stretch;
+---code---
+# 可能值描述
+---table---
+值 描述
+flex-start 	交叉轴的起点对齐。
+flex-end 	交叉轴的终点对齐。
+center 		交叉轴的中点对齐。
+baseline: 	项目的第一行文字的基线对齐。
+stretch  	默认值。如果项目未设置高度或设为auto，将占满整个容器的高度。
+---table---
+`
+flex.common = `
+title 常用的写法
+# sass 样式示例
+---code---
+.flex-row{
+	display: flex;
+	flex-direction: row;
+}
+.flex-col{
+	display: flex;
+	flex-direction: column;
+}
+// 主轴方向居中
+.f-jc-c{
+	justify-content: center;
+}
+// 主轴方向两端对齐
+.f-jc-sb{
+	justify-content: space-between;
+}
+// 主轴方向等距离对齐
+.f-jc-sa{
+	justify-content: space-around;
+}
+// 交叉轴方向居中
+.f-ai-c{
+	align-items: center;
+}
+// 主轴交叉轴方向都居中
+.flex-center{
+	@extend .f-ai-c
+	@extend .f-jc-c
+}
+// 主轴两端对齐，交叉轴居中
+.f-sb-c{
+	@extend f-jc-sb;
+	@extend f-ai-c;
+}
+// 主轴等距离对齐，交叉轴居中
+.f-sa-c{
+	@extend f-jc-sa;
+	@extend f-ai-c;
+}
+.f-1{
+	flex: 1;
+}
+---code---
+# less 样式示例
+---code---
+.flex-row{
+  display: flex;
+  flex-direction: row;
+}
+.flex-col{
+  display: flex;
+  flex-direction: column;
+}
+// 主轴方向居中
+.f-jc-c{
+  justify-content: center;
+}
+// 主轴方向两端对齐
+.f-jc-sb{
+  justify-content: space-between;
+}
+// 主轴方向等距离对齐
+.f-jc-sa{
+  justify-content: space-around;
+}
+// 交叉轴方向居中
+.f-ai-c{
+  align-items: center;
+}
+// 主轴交叉轴方向都居中
+.flex-center{
+  .f-ai-c
+  .f-jc-c
+}
+// 主轴两端对齐，交叉轴居中
+.f-sb-c{
+  f-jc-sb;
+  f-ai-c;
+}
+// 主轴等距离对齐，交叉轴居中
+.f-sa-c{
+  f-jc-sa;
+  f-ai-c;
+}
+.f-1{
+  flex: 1;
+}
+---code---
 `
