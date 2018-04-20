@@ -71,6 +71,9 @@
 	@extend .f-ai-c;
 	@extend .f-jc-sa;
 }
+.f-w{
+	flex-wrap: wrap;
+}
 // 占满剩余空间
 .f-1{
 	flex: 1;

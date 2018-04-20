@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { api } from 'assets/common'
 import ContentPanel from 'components/ContentPanel'
 import Header from 'components/Header'
+import { random } from 'assets/saying'
 
 class Home extends Component {
 	componentWillMount(){
@@ -33,7 +34,13 @@ class Home extends Component {
 					<Header.Item path='/calendar' title='日历'/>
 					<Header.Item path='/about' title='关于'/>
 				</Header>
-				<div className='flex-row f-jc-c'>
+				<div className='flex-row f-jc-c f-w'>
+					<div>
+						<ContentPanel />
+						<ContentPanel />
+						<ContentPanel />
+						<ContentPanel />
+					</div>
 					<div>
 						<ContentPanel />
 						<ContentPanel />

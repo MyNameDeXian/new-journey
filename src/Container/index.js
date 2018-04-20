@@ -37,7 +37,9 @@ export default class Container extends Component{
 		let header = document.querySelector('.header-comp')
 		if(top >= 160) {
 			topEl.style.bottom = '20px';
-			header.style.height = '0'
+			if(location.hash !== "#/"){
+				header.style.height = '0'
+			}
 		} else{
 			topEl.style.bottom = '-60px';
 			header.style.height = '56px'
