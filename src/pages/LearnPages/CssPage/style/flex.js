@@ -263,13 +263,13 @@ title 常用的写法
 }
 // 主轴两端对齐，交叉轴居中
 .f-sb-c{
-  f-jc-sb;
-  f-ai-c;
+  .f-jc-sb;
+  .f-ai-c;
 }
 // 主轴等距离对齐，交叉轴居中
 .f-sa-c{
-  f-jc-sa;
-  f-ai-c;
+  .f-jc-sa;
+  .f-ai-c;
 }
 .f-1{
   flex: 1;

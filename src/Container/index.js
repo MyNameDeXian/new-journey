@@ -9,16 +9,13 @@ export default class Container extends Component{
 		}
 	}
 	componentDidMount(){
-		window.onresize = () =>{
-			if( window.innerHeight !== this.state.height ) {
-				location.reload(false);
-			}
-		}
+		let a = 1
+		React.Children.map(a, (item, i)=>{ console.log(item, i) })
 	}
 	render(){
 		let { height, isShowToTop } = this.state;
 		return(
-			<div onScroll={this.onScroll} className='container-comp' style={{height: height}}>
+			<div onScroll={this.onScroll} className='container-comp'>
 				<div ref={el =>this.toTop = el} className='to-top-comp' />
 				<div ref={el =>this.toTopBtn = el} onClick={this.toTopClick} className='to-top-btn'>
 					Top 

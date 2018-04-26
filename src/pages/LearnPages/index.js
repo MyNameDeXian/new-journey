@@ -1,11 +1,6 @@
 // 学习 公共页 learns index
 import React 	from 'react'
 import Header 	from 'components/Header'
-import Html 	from './HtmlPage/'
-import Css 		from './CssPage/'
-import JS 		from './JavaScript/'
-import WP from './Webpack/'
-import RT 	from './ReactPage/'
 
 const web = '/web';
 const LearnHeader = () =>(

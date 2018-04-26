@@ -18,7 +18,8 @@ import {
 	MathComp
  } from 'pages/LearnPages/JsType'
 import {
-	HtmlTag
+	HtmlTag,
+	GlobalAttrComp
 } from 'pages/LearnPages/HtmlPage'
 import {
 	StyleComp,
@@ -48,6 +49,7 @@ export default () => (
 			<Route path={webpath + '/html'} render={() =>(
 				<Switch>
 					<Route path={webpath + '/html/HtmlTag'} component={HtmlTag}/>
+					<Route path={webpath + '/html/globalAttr'} component={GlobalAttrComp}/>
 				</Switch>
 			)}/>
 			<Route path={webpath + '/css'} render={() =>( 
