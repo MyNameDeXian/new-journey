@@ -40,7 +40,7 @@ export default class Container extends Component{
 			if(location.hash !== "#/"){
 				header.style.height = '0'
 			}
-		} else{
+		} else if(top < 100){
 			topEl.style.bottom = '-60px';
 			header.style.height = '56px'
 		}
