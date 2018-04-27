@@ -57,7 +57,7 @@ var dom = document.querySelector('#id');
 ---code---
 # 通过 id 和 <a> 标签制作链接锚点
 ---code---
-// <a> 标签属性 href 设置方式 ( # + 命名 )
+// <a> 标签属性 href 设置方式 ( #号 + 命名 )
 <a href="#top">点击跳转</a>
 
 //在跳转到的地方，设置元素的 id 和 name 都需要和 <a> 标签的 href 值一致。

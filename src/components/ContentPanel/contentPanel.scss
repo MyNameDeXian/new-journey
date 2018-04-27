@@ -31,9 +31,10 @@
 		.ctn-code{
 			position: relative;
 			padding: 12px 8px;
-			color: #333;
+			color: #555;
 			// text-shadow: 0 1px white;
-			background: #f5f2f0;
+			background: #f5f5f5;
+			// background: #eee;
 			border-left: 2px solid #198912;
 			border-right: 2px solid #198912;
 			border-radius: 8px;
@@ -66,9 +67,10 @@
 			position: relative;
 			margin: 5px 0 5px 5px;
 			padding: 0 0 3px 10px;
-			color: #333;
+			color: #666;
 			white-space: pre-wrap;
 			border-bottom: 1px dashed #666;
+			border-bottom: 1px solid #ddd;
 		}
 		.ctn-table{
 			margin-top: 6px;

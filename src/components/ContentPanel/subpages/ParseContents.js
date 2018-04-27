@@ -45,7 +45,7 @@ export function titleText(str){
 			<p class='f-1 ctn-title-line'></p>
 		</div>`
 	)
-	return str.replace(/[^ ]\n?#+ ([^\n]+)/g, (reg, $1)=>{
+	return str.replace(/\n?#+ ([^\n]+)/g, (reg, $1)=>{
 		return !$1 ? '' : titleDom($1)
 	})
 }
