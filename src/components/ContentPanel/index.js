@@ -7,14 +7,8 @@ import {
 	ctnText,
 	tableText
 } from './subpages/ParseContents'
-const love = `
-title 愿
-----
-	和你
-	若梦，便一梦不醒。
-	若真，守护你一生。
-----
-`
+import { random } from 'assets/saying'
+
 export default class ContentPanel extends Component {
 	constructor(props){
 		super(props);
@@ -28,7 +22,7 @@ export default class ContentPanel extends Component {
 
 		let { title, children } = this.props;
 		let dataId = title;
-		let text = (children || love).replace(/^\n*title (.*)\n/, (reg, $1) =>{
+		let text = (children || random()).replace(/^\n*title (.*)\n/, (reg, $1) =>{
 			title = $1;
 			return '';
 		});
