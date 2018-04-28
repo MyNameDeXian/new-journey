@@ -23,7 +23,7 @@ class Home extends Component {
 						<TopBtn type='/web' path='/html/HtmlTag'>HTML</TopBtn>
 						<TopBtn type='/web' path='/css/style'>CSS</TopBtn>
 						<TopBtn type='/web' path='/javaScript/GlobalsApi'>JavaScript</TopBtn>
-						<TopBtn type='/web' path='/webpack/Webpack'>Webpack</TopBtn>
+						<TopBtn type='/web' path='/webpack/webpack'>Webpack</TopBtn>
 						<TopBtn type='/web' path='/react/React'>React</TopBtn>
 						<TopBtn type='/web' path='/vue/Vue'>Vue</TopBtn>
 					</div>

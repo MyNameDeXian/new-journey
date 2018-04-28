@@ -1,35 +1,5 @@
 export const webpackApi = {}
 
-webpackApi.config = `
-title webpack 简单示例
-# webpack 简单示例
----code---
-const path = require("path"); 
-const webpack = require("webpack");
-cosnt HtmlWebpackPlugin = require("html-webpack-plugin");
-cosnt CleanWebpackPlugin = require("clean-webpack-plugin");
-
-module.exports = {
-	// 入口文件
-	entry: path.resolve(__dirname, './src/index.js'),
-	// 出口文件
-	output: {
-		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'dist')
-	},
-	// 配置模块如何解析
-	resolve: {
-		// 创建 import 或 require 的别名，来确保模块引入变得更简单
-		alias: {
-			components: path.resolve(__dirname, './src/components'),
-			pages: path.resolve(__dirname, './src/pages'),
-		},
-		// 自动解析文件扩展名
-		extensions: ['.js', '.jsx']
-	},
-}
----code---
-`
 webpackApi.path = `
 title path 路径处理
 --------

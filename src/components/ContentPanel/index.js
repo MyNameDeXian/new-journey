@@ -19,10 +19,14 @@ export default class ContentPanel extends Component {
 		}
 	}
 	componentWillMount(){
-
-		let { title, children } = this.props;
+		let { title, children, date } = this.props;
 		let dataId = title;
-		let text = (children || random()).replace(/^\n*title (.*)\n/, (reg, $1) =>{
+		let say = random();
+		let text = (children || say).replace(/^\n*date (.*)\n/, (reg, $1) =>{
+			date = $1;
+			return '';
+		});
+		text = (children || say).replace(/^\n*title (.*)\n/, (reg, $1) =>{
 			title = $1;
 			return '';
 		});
@@ -42,13 +46,14 @@ export default class ContentPanel extends Component {
 		this.contents.innerHTML = text;
 	}
 	render(){
-		let { height, dataId, title } = this.state;
+		let { height, dataId, title, date } = this.state;
+		if( !date ) date = this.getDate(); 
 		return(
 			<div className='content-panel box-sd width' data-id={dataId}>
 				<div className='main-title tx-center'>
 					{ title || 'title' }
 				</div>
-				{this.props.children && <div className='meta tx-center'>作者: 李德贤 - 日期: 2018-02-28</div>}
+				{this.props.children && <div className='meta tx-center'>作者: 李德贤 - 日期: {date}</div>}
 				<div className='contents' ref={el =>this.contents = el} style={{maxHeight: height}}>
 					
 				</div>
@@ -57,6 +62,13 @@ export default class ContentPanel extends Component {
 				</div>
 			</div>
 		)
+	}
+	getDate(){
+		let date = new Date();
+		let year = date.getFullYear();
+		let month = date.getMonth();
+		let day = date.getDate();
+		return `${year}-${month+1}-${day}`
 	}
 	allRead = () =>{
 		this.setState({

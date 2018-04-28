@@ -32,7 +32,8 @@ import {
 	FlexComp
 } from 'pages/LearnPages/CssPage'
 import {
- 	Webpack 
+ 	Webpack,
+ 	DevConfig
 } from 'pages/LearnPages/Webpack'
 import {
  	ReactAttr,
@@ -84,7 +85,8 @@ export default () => (
 			)}/>
 			<Route path={webpath + '/webpack'} render={() =>(
 				<Switch>
-					<Route path={webpath + '/webpack/Webpack'} component={Webpack}/>
+					<Route path={webpath + '/webpack/webpack'} component={Webpack}/>
+					<Route path={webpath + '/webpack/dev'} component={DevConfig}/>
 				</Switch>
 			)}/>
 			<Route path={webpath + '/react'} render={() =>( 
