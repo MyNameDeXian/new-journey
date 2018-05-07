@@ -98,3 +98,13 @@ title 出口(output)
 	[name] 根据入口文件名称，打包成相同的名称，有几个入口文件，就打包出几个文件。
 -----
 `
+webpackApi.module = `
+title 模块(module)
+
+`
+webpackApi.resolve = `
+title 解析(resolve)
+`
+webpackApi.plugins = `
+title 插件(plugins)
+`

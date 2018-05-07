@@ -1,3 +1,4 @@
+import {color} from './color'
 //替换特殊字符
 export function specialChar(char, symbol){
 	let reg = new RegExp(char, 'g')
@@ -28,12 +29,15 @@ window.copyCode = (el) =>{
 //替换代码内容文本
 export function codeText(str){
 	// 代码节点
-	const codes = (code) =>(
-		`<div class='ctn-code'>
-			<div class='copy-btn' onclick=copyCode(this)>复制</div>
-			<pre id='copyCode'>${code}</pre>
-		</div>`
-	)
+	const codes = (code) =>{
+		code = color.zhushi(code);
+		return (
+			`<div class='ctn-code'>
+				<div class='copy-btn' onclick=copyCode(this)>复制</div>
+				<pre id='copyCode'>${code}</pre>
+			</div>`
+		)
+	}
 	return replaceText(str, /---code-*/g, codes);
 }
 //替换标题
@@ -45,7 +49,7 @@ export function titleText(str){
 			<p class='f-1 ctn-title-line'></p>
 		</div>`
 	)
-	return str.replace(/\n?#+ ([^\n]+)/g, (reg, $1)=>{
+	return str.replace(/\n?#+ ([^\n]+)/g, (reg, $1) =>{
 		return !$1 ? '' : titleDom($1)
 	})
 }
@@ -59,6 +63,7 @@ export function ctnText(str){
 		let str = '';
 		for(let i=0; i<ctns.length; i++){
 			let ctn = ctns[i];
+			ctn = ctn.replace(/((http:|https:)[^ ]+) ([^\n]+)/g, `<a href=$1 target=_blank>$3</a>`)
 			ctn = ctn.replace(/^ +/g, '&nbsp;◆&nbsp;&nbsp;');
 			ctn = ctn.replace(/^	+/g, '&nbsp;◆&nbsp;&nbsp;');
 			ctn = ctn.replace(/^(注意(:|：))/, '$1'.fontcolor('red'))

@@ -3,6 +3,7 @@ import Aside from 'components/Aside'
 import Layout from 'components/Layout'
 import { webpackApi } from './content/webpackApi'
 import { dev } from './content/devConfig'
+import { install } from './content/install'
 
 function UpAside(props){
 	const type = '/web/webpack/'
@@ -19,7 +20,7 @@ function UpAside(props){
 }
 export function InstallWebpack(){
 	return(
-		<Layout ctns={webpackApi}>
+		<Layout ctns={install}>
 			<UpAside />
 		</Layout>
 	)

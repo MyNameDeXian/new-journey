@@ -16,6 +16,9 @@ color.code = function(str){
 		let reg = new RegExp('(\n| )'+this.commons[key], 'g');
 		str = str.replace(reg, `<span style=color:#00f>${key}</span>`)
 	}
+	return str;
+}
+color.zhushi = function(str){
 	// 注释的颜色 #008200 
 	let zhushi = '#588'
 	str = str.replace(/(\/\/.*\n)/g, `<span style=color:${zhushi};font-size:14px>$1</span>`)
