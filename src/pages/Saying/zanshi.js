@@ -28,7 +28,6 @@
 react 在项目中实际运用，以开发商城项目为例：
 	组件的分类，(组件尽量保持单一性)
 		icon 类小组件
-			
 		表单类组件 form-comp
 		展示类组件 show-comp
 		动画组件 animation-comp

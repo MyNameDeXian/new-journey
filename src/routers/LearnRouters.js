@@ -33,7 +33,8 @@ import {
 } from 'pages/LearnPages/CssPage'
 import {
  	Webpack,
- 	DevConfig
+ 	DevConfig,
+ 	InstallWebpack
 } from 'pages/LearnPages/Webpack'
 import {
  	ReactAttr,
@@ -87,6 +88,7 @@ export default () => (
 				<Switch>
 					<Route path={webpath + '/webpack/webpack'} component={Webpack}/>
 					<Route path={webpath + '/webpack/dev'} component={DevConfig}/>
+					<Route path={webpath + '/webpack/install'} component={InstallWebpack}/>
 				</Switch>
 			)}/>
 			<Route path={webpath + '/react'} render={() =>( 
