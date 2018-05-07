@@ -4,8 +4,9 @@ import  './home.scss'
 import { connect } from 'react-redux'
 import { api } from 'assets/common'
 import ContentPanel from 'components/ContentPanel'
-import Header from 'components/Header'
 import { random } from 'assets/saying'
+import Header from 'components/Header'
+let Item = Header.Item;
 
 class Home extends Component {
 	componentWillMount(){
@@ -29,10 +30,11 @@ class Home extends Component {
 					</div>
 				</div>
 				<Header>
-					<Header.Item path='/' title='首页'/>
-					<Header.Item path='/plan' title='计划'/>
-					<Header.Item path='/calendar' title='日历'/>
-					<Header.Item path='/about' title='关于'/>
+					<Item headPath='/' 			type='' 		 title='首页'/>
+					<Item headPath='/wark-plan' type='/plan' 	 title='计划'/>
+					<Item headPath='/web' 		type='/address'  title='网址大全'/>
+					<Item headPath='/calendar' 	type='/calendar' title='日历'/>
+					<Item headPath='/about' 	type='' 		 title='关于'/>
 				</Header>
 				<div className='flex-row f-jc-c f-w'>
 					<div>

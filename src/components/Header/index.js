@@ -28,18 +28,19 @@ export default class Header extends Component{
 }
 Header.Item = (props) =>{
 	// path路由，type当前网页类型：比如学习网页，计划网页等等等
-	let { title, path, type } = props;
+	let { title, type, headPath, asidePath } = props;
 	// 获取当前路由
-	let param = location.hash;
+	let param = location.hash.replace('#', '');
 	// 如果当前路由 == 组件传过来的路由，就激活当前路由
 	let active = '';
-	if( param.indexOf(type) != -1 ){
+	if( param.indexOf(headPath) != -1 ){
 		active = 'active-nav-item';
 	}
+	type = type || '';
 	return(
 		<div className={'navbar-item ' + active} onClick={() =>{
-			if(param == path) return; 
-			path = (type || '') + path;
+			let path = type + headPath + (asidePath || '');
+			if(param == path) return;
 			api.push( path );
 		}}>
 			{title}
