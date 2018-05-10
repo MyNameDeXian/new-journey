@@ -7,6 +7,7 @@ import Home from 'pages/Home'
 import Calendar from 'pages/Calendar'
 import LearnRouters from './LearnRouters'
 import PlanRouters from './PlanRouters'
+import AddressRouters from './AddressRouters'
 
 export default () => (
 	<Container>
@@ -14,5 +15,6 @@ export default () => (
 		<Route exact path='/calendar' component={Calendar}/>
 		<PlanRouters />
 		<LearnRouters />
+		<AddressRouters />
 	</Container>
 )

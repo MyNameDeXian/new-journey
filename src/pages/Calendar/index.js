@@ -8,7 +8,7 @@ export default class Calendar extends Component{
 		return(
 			<div>
 				<Header>
-					<Header.Item path='/calendar' 			title='日历'/>
+					<Header.Item headPath='/calendar' title='日历'/>
 				</Header>
 			</div>
 		)
