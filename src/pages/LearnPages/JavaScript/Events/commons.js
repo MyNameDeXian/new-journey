@@ -1,4 +1,17 @@
 export const commons = {};
+commons.event = `
+title Event 几个常用属性
+# Event 几个常用属性
+---code---
+// 返回触发事件的节点对象
+let el = event.target 
+
+// 阻止默认事件，比如 a 标签的跳转
+event.preventDefault()
+
+
+---code---
+`
 commons.addEventListener =`
 # addEventListener 绑定事件:
 ---code---
