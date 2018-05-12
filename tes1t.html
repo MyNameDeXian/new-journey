@@ -8,7 +8,7 @@
 			height: 100%;
 		}
 		.ctr{
-			margin: auto;
+			margin: 50px auto;
 			width: 50%;
 			border: 1px solid #333;
 			display: flex;
@@ -25,6 +25,7 @@
 			height: 50px;
 			border: 1px solid #333;
 			z-index: 10;
+			transition: transform .1s;
 		}
 		.box div{
 			width: 20%;
@@ -40,6 +41,7 @@
 		let start = null;
 		let overDom = null;
 		let draggable = false;
+		let over = true;
 		function getIndex(dom){
 			let boxs = document.getElementsByClassName('box');
 			boxs = Array.prototype.slice.call(boxs)
@@ -49,13 +51,13 @@
 			if( draggable === false ) return;
 			let x = e.clientX;
 			let y = e.clientY;
-			move = [x, y];
 			dom.style.transform = `translate(${ x - start[0] }px, ${ y - start[1] }px)`;
 			dom.style.opacity = '0.4';
 			dom.style.zIndex = '1';
 			// console.log(e.target)
 		}
 		function mousedown(e){
+			if(e.target.className !== 'box') return;
 			draggable = true;
 			let x = e.clientX;
 			let y = e.clientY;
@@ -64,35 +66,86 @@
 			moveIndex = getIndex(dom);
 			console.log(moveIndex)
 		}
-		function mouseover(e){
-			if(draggable === false) return;
-			overDom = e.target;
-			if(overDom.className !== 'box') return;
+		function mouseover(e){ 
+			if( !draggable ) return;
+			console.log(111111111)
+			let node = e.target
+			if(node.className !== 'box' || dom == node) return;
+			overDom = node;
 			overIndex = getIndex(overDom);
 			let num = moveIndex - overIndex; 
 			let ram = num % 2;
+			// 判断鼠标移动的方向
 			if(num > 0){ // 大于 0 时时向左 或 向上移动
-				if(ram === 1){ //向左
-					overDom.style.transform = `translate(100%, 0)`;
-				} else { //向上
-					let next = overDom.nextSibling;
-			console.log(next)
-					let nx = next.offsetLeft;
-					let ny = next.offsetTop;
-					let x = overDom.offsetLeft;
-					let y = overDom.offsetTop;
-					next.style.transform = `translate(100%, 0)`;
-					overDom.style.transform = `translate(${nx-x}px, ${ny-y}px)`;
+				move = 1;
+				if(ram === 1){ //向左移动
+					if( overDom.style.transform ){ // 若移动过就原路返回
+						let pre = overDom.previousElementSibling;
+						pre && (pre.style.transform = '')
+						overDom.style.transform = '';
+					} else { // 向左移动
+						overDom.style.transform = `translate(100%, 0)`;
+					}
+				} else if(ram === 0){ //向上移动
+					let next = overDom.nextElementSibling;
+					if( overDom.style.transform ){ //若移动过的原路返回
+						next && (next.style.transform = '')
+						overDom.style.transform = '';
+					} else {
+						let nx = next.offsetLeft;
+						let ny = next.offsetTop;
+						let x = overDom.offsetLeft;
+						let y = overDom.offsetTop;
+						overDom.style.transform = `translate(${nx-x}px, ${ny-y}px)`;
+						let nNext = next.nextElementSibling;
+						let nNx = nNext.offsetLeft;
+						let nNy = nNext.offsetTop;
+						next.style.transform = `translate(${nNx-nx}px, ${nNy-ny}px)`;
+					}
 				} 
-			} else { // 向右 或 向下移动
-
+			} else if( num < 0 ){ // 向右 或 向下移动
+				move = -1
+				if(ram === -1){ //向右 移动
+					if(overDom.style.transform){
+						let next = overDom.nextElementSibling;
+						next && (next.style.transform = '')
+						overDom.style.transform = '';
+					} else {
+						overDom.style.transform = `translate(-100%, 0)`;
+					}
+				} else{ //向下 移动
+					let pre = overDom.previousElementSibling;
+					if( overDom.style.transform ){ //若移动过的原路返回
+						pre && (pre.style.transform = '')
+						overDom.style.transform = '';
+					} else {
+						let px = pre.offsetLeft;
+						let py = pre.offsetTop;
+						let x = overDom.offsetLeft;
+						let y = overDom.offsetTop;
+						overDom.style.transform = `translate(${px-x}px, ${py-y}px)`;
+						let pPre = pre.previousElementSibling;
+						let pPx = pPre.offsetLeft;
+						let pPy = pPre.offsetTop;
+						pre.style.transform = `translate(${pPx-px}px, ${pPy-py}px)`;
+					}
+				}
 			}
-			console.log(num, ram,moveIndex, overIndex)
 		}
 		function mouseup(e){
+			if( !draggable ) return;
 			dom.style.transform = '';
 			dom.style.opacity = '';
 			dom.style.zIndex = '';
+			if(move === 1){
+				dom.parentNode.insertBefore(dom, overDom);
+			} else {
+				dom.parentNode.insertBefore(dom, overDom.nextElementSibling);
+			}
+			let boxs = document.getElementsByClassName('box');
+			for(let i=0; i< boxs.length; i++){
+				boxs[i].style.transform = '';
+			}
 			dom = null;
 		 	move = null;
 			start = null;
@@ -114,40 +167,40 @@
 <body>
 	<div class="ctr" id='ctr' onmousemove='mousemove(event)'>
 		<div class='box'onmouseover='mouseover(event)' onmouseout='mouseout(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>1</div>
+			<div onclick='closeBox(event)'>1关闭</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>2</div>
+			<div onclick='closeBox(event)'>2关闭</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>3</div>
+			<div onclick='closeBox(event)'>3关闭</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>4</div>
+			<div onclick='closeBox(event)'>4关闭</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>5</div>
+			<div onclick='closeBox(event)'>5关闭</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>6</div>
+			<div onclick='closeBox(event)'>6关闭</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>7</div>
+			<div onclick='closeBox(event)'>7关闭</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>8</div>
+			<div onclick='closeBox(event)'>8关闭</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>9</div>
+			<div onclick='closeBox(event)'>9关闭</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>10</div>
+			<div onclick='closeBox(event)'>10关闭</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)' >
-			<div onclick='closeBox(event)'>11</div>
+			<div onclick='closeBox(event)'>11关闭</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>12</div>
+			<div onclick='closeBox(event)'>12关闭</div>
 		</div>
 	</div>
 </body>
