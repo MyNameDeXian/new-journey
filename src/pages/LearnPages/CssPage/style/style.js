@@ -157,6 +157,39 @@ auto    如果内容被修剪，则浏览器会显示滚动条以便查看其余
 	如果值为 scroll，不论是否需要，用户代理都会提供一种滚动机制。因此，有可能即使元素框中可以放下所有内容也会出现滚动条
 -----
 `
+style.userSelect = `
+title user-select 可否选择文本
+# user-select 设置用户是否可以选择文本
+---code---
+user-select: text | auto | all | none;
+---code---
+# 可能值描述
+---table---
+值 描述
+none 不可以选择文本
+text 可以选择文本（默认值）
+all  当所有内容作为一个整体时可以被选择
+auto 选择一个整体
+---table---
+-----
+提示：
+	IE6-9不支持该属性，但支持使用标签属性 onselectstart="return false;" 来达到 user-select:none 的效果；Safari和Chrome也支持该标签属性；
+	直到Opera12.5仍然不支持该属性，但和IE6-9一样，也支持使用私有的标签属性 unselectable="on" 来达到 user-select:none 的效果；unselectable 的另一个值是 off；
+	除Chrome和Safari外，在其它浏览器中，如果将文本设置为 -ms-user-select:none;，则用户将无法在该文本块中开始选择文本。不过，如果用户在页面的其他区域开始选择文本，则用户仍然可以继续选择将文本设置为 -ms-user-select:none; 的区域文本；
+	对应的脚本特性为userSelect。
+-------
+`
+style.opacity = `
+title opacity 透明度
+# opacity 设置元素节点的透明度
+---code---
+opacity: (0 - 1);
+---code---
+-----
+	值为 0 到 1 之间
+	0 完全透明，1 不透明(默认为1)
+-----
+`
 style.visibility = `
 # visibility 属性规定元素是否可见
 ---code---

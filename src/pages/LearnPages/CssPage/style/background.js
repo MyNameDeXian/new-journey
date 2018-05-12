@@ -5,9 +5,9 @@ title background 简写
 # background 简写属性在一个声明中设置所有的背景属性
 不需要按顺序写
 ---code---
-//            颜色   背景图   位置   是否重复 
-background: color image position repeat origin clip attachment
-background: #fff url('./imgUrl') center no-repeat fixed;
+//            颜色   背景图   位置 / 尺寸   是否重复 
+background: color image position / size repeat origin clip attachment
+background: #fff url('./imgUrl') top center / 50% 50% no-repeat fixed;
 ---code---
 # 可能值描述
 ---table---

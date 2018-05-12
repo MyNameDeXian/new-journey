@@ -8,7 +8,8 @@
 			height: 100%;
 		}
 		.ctr{
-			margin: 50px auto;
+			user-select: none;
+			margin: auto;
 			width: 50%;
 			border: 1px solid #333;
 			display: flex;
@@ -18,192 +19,228 @@
 		.box{
 			position: relative;
 			flex: none;
-			margin: 10px 0;
+			margin: 10px;
 			padding: 0;
 			box-sizing: border-box;
-			width: 50%;
+			width: 45%;
 			height: 50px;
 			border: 1px solid #333;
 			z-index: 10;
-			transition: transform .1s;
 		}
 		.box div{
 			width: 20%;
 			height: 20px;
 			border: 1px solid #333;
 		}
+/*		.box{
+			transform: translate(100px, 100px);
+		}*/
 	</style>
 	<script>
-		let dom = null;
-		let move = null;
-		let moveIndex = null;
-		let overIndex = null;
-		let start = null;
-		let overDom = null;
-		let draggable = false;
-		let over = true;
+		// 初始状态， 用于开始 和 完成时初始化状态
+		const initState = {
+			dom 			: null,	// 被拖拽的元素节点
+			move 			: null, 	// 拖拽元素移动时 鼠标的移动坐标
+			domIndex 	: null,	// 被拖拽元素节点下标
+			endIndex 	: null,	// 鼠标进入的元素节点下标
+			start 		: null,  // 拖拽元素节点前开始鼠标坐标
+			overDom 		: null,  // 鼠标最后进入的元素节点
+			draggable 	: false, // 是否开始拖拽
+		}
+		// 用于保存执行过程数据
+		let state = { ...initState };
+		// 获取 列表中元素下标
 		function getIndex(dom){
 			let boxs = document.getElementsByClassName('box');
 			boxs = Array.prototype.slice.call(boxs)
 			return boxs.indexOf(dom);
 		}
+		// 取消过度效果
+		function removeTransition(dom){
+			dom.style.transition = '';
+		}
+		//设置 和 取消变换/过度, 变换移动过程 把 zIndex 调到最底层, 完成后取消 zIndex
+		function setTransform(dom, x, y){
+			console.log(dom)
+			if( !dom.style.transition ){
+				dom.style.transition = 'transform 0.2s linear';
+			}
+			if(dom.style.transform) {
+				dom.style.transform = '';
+			} else {
+				dom.style.transform = `translate(${ x }px, ${ y }px)`;
+			}
+			setZIndex(dom);
+		}
+		// 去除变换效果
+		function removeTransfrom(dom){
+			dom.style.transform = '';
+		}
+		function setZIndex(dom){
+			dom.style.zIndex = '1';
+			let timer = setTimeout(function() {
+				dom.style.zIndex = '';
+				clearTimeout(timer);
+			}, 200);
+		}
+		// 点击拖拽项目时调用
+		function mousedown(e){
+			dom = e.target;
+			if(dom.className !== 'box') return;
+			state.start = [e.pageX, e.pageY]; // 点击时，鼠标坐标
+			state.draggable = true; // 开始拖拽
+			state.domIndex = getIndex(dom);  // 被拖拽元素下标
+			state.endIndex = state.domIndex; // 鼠标移进元素下标
+			removeTransition(dom); // 去掉拖拽元素的过度属性
+			state.dom = dom; // 保存被拖拽元素
+		}
+		// 拖拽项目时调用
 		function mousemove(e){
+			let { dom, start, draggable } = state;
 			if( draggable === false ) return;
-			let x = e.clientX;
-			let y = e.clientY;
+			let x = e.pageX;
+			let y = e.pageY;
+			state.move = [x, y];
 			dom.style.transform = `translate(${ x - start[0] }px, ${ y - start[1] }px)`;
 			dom.style.opacity = '0.4';
-			dom.style.zIndex = '1';
-			// console.log(e.target)
+			dom.style.zIndex = '9';
 		}
-		function mousedown(e){
-			if(e.target.className !== 'box') return;
-			draggable = true;
-			let x = e.clientX;
-			let y = e.clientY;
-			start = [x, y];
-			dom = e.target;
-			moveIndex = getIndex(dom);
-			console.log(moveIndex)
+		// 放下项目时调用
+		function mouseup(e){
+			let { dom, overDom, domIndex , endIndex } = state;
+			if(!state.draggable) return;
+			let boxs = document.getElementsByClassName('box');
+			//去掉变换和过度
+			for(let i=0; i < boxs.length; i++){
+				removeTransition(boxs[i]);
+				removeTransfrom(boxs[i]);
+			}
+			// 移动结束 初始化数据
+			dom.style.opacity = '';
+			dom.style.zIndex = '';
+			state = { ...initState }
+			// 位置发生过交换的，把移动节点 移动到最后发生移动的节点前面
+			if( domIndex === endIndex ) return;
+			let parentNode = dom.parentNode;
+			if( overDom != null ) {
+				parentNode.insertBefore(dom, overDom)
+			} else {
+				parentNode.appendChild(dom);
+			}
+			
 		}
-		function mouseover(e){ 
-			if( !draggable ) return;
-			console.log(111111111)
-			let node = e.target
-			if(node.className !== 'box' || dom == node) return;
-			overDom = node;
-			overIndex = getIndex(overDom);
-			let num = moveIndex - overIndex; 
-			let ram = num % 2;
-			// 判断鼠标移动的方向
-			if(num > 0){ // 大于 0 时时向左 或 向上移动
-				move = 1;
-				if(ram === 1){ //向左移动
-					if( overDom.style.transform ){ // 若移动过就原路返回
-						let pre = overDom.previousElementSibling;
-						pre && (pre.style.transform = '')
-						overDom.style.transform = '';
-					} else { // 向左移动
-						overDom.style.transform = `translate(100%, 0)`;
-					}
-				} else if(ram === 0){ //向上移动
-					let next = overDom.nextElementSibling;
-					if( overDom.style.transform ){ //若移动过的原路返回
-						next && (next.style.transform = '')
-						overDom.style.transform = '';
+		// 拖拽项目移动覆盖另一个项目时调用
+		function mouseover(e){
+			let node = e.target;
+			let { dom, draggable, domOffset, endIndex } = state;
+			// 未点击鼠标不触发，拖拽元素自己也不触发，空白处不触发
+			if( !draggable || node.className !== 'box' || node === dom ) return;
+			console.log('over')
+			let index = getIndex(node);
+			//				当前		上一次的
+			let count = index - endIndex;
+			state.endIndex = index;
+			// 判断拖拽元素插入到那个元素前面 -- 大于 0 的都是向下移动
+			// 向下移动时要插入到该元素后面， 即它下一个元素前面
+			if( count >= 0 ) { 
+				state.overDom = node.nextElementSibling;
+			} else {
+				state.overDom = node;
+			}
+			moveTo(node, count); // 拖拽元素覆盖其他元素时移动效果
+		}
+		function moveTo(node, count){
+			let nextDom = node;
+			let len = Math.abs(count);
+			console.log(len, count)
+			if(node.style.transform){ // 拖拽元素往回拖拽
+				len++
+				if(count > 0){
+					state.endIndex++;
+				} else {
+					state.endIndex--;
+				}
+				for (var i = 0; i < len; i++) {
+					setTransform(node);
+					if(count > 0){
+						node = node.previousElementSibling;
 					} else {
-						let nx = next.offsetLeft;
-						let ny = next.offsetTop;
-						let x = overDom.offsetLeft;
-						let y = overDom.offsetTop;
-						overDom.style.transform = `translate(${nx-x}px, ${ny-y}px)`;
-						let nNext = next.nextElementSibling;
-						let nNx = nNext.offsetLeft;
-						let nNy = nNext.offsetTop;
-						next.style.transform = `translate(${nNx-nx}px, ${nNy-ny}px)`;
+						node = node.nextElementSibling;
 					}
-				} 
-			} else if( num < 0 ){ // 向右 或 向下移动
-				move = -1
-				if(ram === -1){ //向右 移动
-					if(overDom.style.transform){
-						let next = overDom.nextElementSibling;
-						next && (next.style.transform = '')
-						overDom.style.transform = '';
-					} else {
-						overDom.style.transform = `translate(-100%, 0)`;
-					}
-				} else{ //向下 移动
-					let pre = overDom.previousElementSibling;
-					if( overDom.style.transform ){ //若移动过的原路返回
-						pre && (pre.style.transform = '')
-						overDom.style.transform = '';
-					} else {
-						let px = pre.offsetLeft;
-						let py = pre.offsetTop;
-						let x = overDom.offsetLeft;
-						let y = overDom.offsetTop;
-						overDom.style.transform = `translate(${px-x}px, ${py-y}px)`;
-						let pPre = pre.previousElementSibling;
-						let pPx = pPre.offsetLeft;
-						let pPy = pPre.offsetTop;
-						pre.style.transform = `translate(${pPx-px}px, ${pPy-py}px)`;
-					}
+					if(!node) return;
+				}
+				return;
+			}
+			for(let i=0; i < len; i++){
+				// 大于 0 时，拖拽元素向上移动，被覆盖元素向下移动
+				if(count > 0) {
+					nextDom = node.previousElementSibling;
+				} else {
+					nextDom = node.nextElementSibling;
+				}
+				let domX = node.offsetLeft;
+				let domY = node.offsetTop;
+				if( nextDom ) {
+					let x = nextDom.offsetLeft;
+					let y = nextDom.offsetTop;
+					setTransform(node, x - domX, y - domY);
+					node = nextDom;
 				}
 			}
 		}
-		function mouseup(e){
-			if( !draggable ) return;
-			dom.style.transform = '';
-			dom.style.opacity = '';
-			dom.style.zIndex = '';
-			if(move === 1){
-				dom.parentNode.insertBefore(dom, overDom);
-			} else {
-				dom.parentNode.insertBefore(dom, overDom.nextElementSibling);
-			}
-			let boxs = document.getElementsByClassName('box');
-			for(let i=0; i< boxs.length; i++){
-				boxs[i].style.transform = '';
-			}
-			dom = null;
-		 	move = null;
-			start = null;
-			overDom = null;
-			draggable = false;
-		}
-		function mouseout(e){
-			console.log(121)
-		}
 		function closeBox(e){
-			e.preventDefault();
 			let removeDom = e.target.parentNode;
 			let parent = removeDom.parentNode;
 			parent.removeChild(removeDom);
-			console.log(1111)
 		}
 	</script>
 </head>
 <body>
 	<div class="ctr" id='ctr' onmousemove='mousemove(event)'>
-		<div class='box'onmouseover='mouseover(event)' onmouseout='mouseout(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>1关闭</div>
+		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
+			<div onclick='closeBox(event)'>1</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>2关闭</div>
+			<div onclick='closeBox(event)'>2</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>3关闭</div>
+			<div onclick='closeBox(event)'>3</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>4关闭</div>
+			<div onclick='closeBox(event)'>4</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>5关闭</div>
+			<div onclick='closeBox(event)'>5</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>6关闭</div>
+			<div onclick='closeBox(event)'>6</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>7关闭</div>
+			<div onclick='closeBox(event)'>7</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>8关闭</div>
+			<div onclick='closeBox(event)'>8</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>9关闭</div>
+			<div onclick='closeBox(event)'>9</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>10关闭</div>
+			<div onclick='closeBox(event)'>10</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)' >
-			<div onclick='closeBox(event)'>11关闭</div>
+			<div onclick='closeBox(event)'>11</div>
 		</div>
 		<div class='box'onmouseover='mouseover(event)' onmouseup='mouseup(event)' onmousedown='mousedown(event)'>
-			<div onclick='closeBox(event)'>12关闭</div>
+			<div onclick='closeBox(event)'>12</div>
 		</div>
 	</div>
+		
 </body>
-
+<script>
+	// document.body.firstElementChild.firstElementChild.remove()
+	// document.getElementById('test').addEventListener('click', function(e){
+		
+	// })
+</script>
 	
 </html>
