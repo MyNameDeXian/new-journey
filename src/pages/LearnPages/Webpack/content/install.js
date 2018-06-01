@@ -4,6 +4,7 @@ install.node = `
 title 安装 node
 # 在 node 官网下载安装 nodeJs
 ------
+https://www.chungold.com/my/course/32
 	https://nodejs.org/en/ 英文官网
 	http://nodejs.cn/ 中文官网
 检测 node 是否安装成功, 在命令行中输入：
